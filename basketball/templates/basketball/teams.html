@@ -1,0 +1,38 @@
+{% extends 'basketball/layout.html' %}
+
+{% block title %}
+	Basketball: Teams
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			{% if data %}
+				{% for conf, teams in data %}
+					<div class="col-lg-6">
+						<table class="table-bordered table-sm all_teams">
+							<thead>
+								<tr><th colspan=5 class="long_header">{{ conf }}</th></tr>
+							</thead>
+							<tbody>
+								{% for team in teams %}
+									{% if forloop.counter0|divisibleby:5 %}
+										<tr><td><a href="{% url 'basketball:team_detail' team.id %}">{{ team }}</a></td>
+									{% elif forloop.counter|divisibleby:5 %}
+										<td><a href="{% url 'basketball:team_detail' team.id %}">{{ team }}</a></td></tr>
+									{% else %}
+										<td><a href="{% url 'basketball:team_detail' team.id %}">{{ team }}</a></td>
+									{% endif %}
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="col">
+					<p>No teams available</p>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

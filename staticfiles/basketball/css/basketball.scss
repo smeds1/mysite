@@ -1,0 +1,83 @@
+$color1: #000000;
+$color2: #000066;
+$color3: #FFCC80;
+$textcolor: #000000;
+$linkcolor: #007a99;
+$linkhovercolor: #00CCFF;
+$tablecolor: honeydew;
+$colorwrong: #FFCCCC;
+$colorright: #CCFFCC;
+
+.table-wrapper{
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.all_teams {
+
+  width: 100%;
+
+  th {
+    background-color: $color1;
+    color: white;
+  }
+}
+
+#team-info {
+  background-color: $tablecolor;
+
+  td, th {
+    text-align: left;
+  }
+}
+
+.tournament-stats{
+  background-color: $color3;
+}
+
+table#bracket{
+	font-size: 0.7em;
+	width: 100%;
+
+  td, tr {
+    padding: 0.1em;
+  }
+
+  th {
+    color: $color1;
+    font-size: 1.5em;
+  }
+}
+
+td#pick_True{
+	background-color: $colorright;
+}
+
+td#pick_False{
+	background-color: $colorwrong;
+}
+
+.ELO{
+	position: relative;
+}
+
+.ELO:hover .tooltip-label{
+	visibility: visible;
+  width: 180px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.graph-links {
+  color: $linkcolor;
+  text-decoration: none;
+  cursor: pointer;
+  list-style: none;
+  padding-left: 0px;
+}
+
+.graph-link:hover {
+  color: $linkhovercolor;
+}

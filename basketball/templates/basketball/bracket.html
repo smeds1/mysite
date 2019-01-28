@@ -1,0 +1,656 @@
+{% extends 'basketball/layout.html' %}
+
+{% block title %}
+	{% if bracket_name == "TRUTH" %}
+		{{ bracket_year }} Final Results
+	{% else %}
+		{{ bracket_name }} - {{ bracket_year }} Bracket
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+	<table id="bracket" class="table-sm table-bordered">
+		{% if bracket_name == "TRUTH" %}
+			<thead><tr><th colspan="100%">{{ bracket_year }} Final Results</th></tr></thead>
+		{% else %}
+			<thead><tr><th colspan="100%">{{ bracket_name }} - {{ bracket_year }} Bracket</th></tr></thead>
+		{% endif %}
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_1.team.id %}">
+		<div class="ELO">(1) {{ top_left_1.team }}
+			<span class="tooltip-label">{{top_left_1.team}} ELO = {{ top_left_1.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g1.team.id %}">
+		<div class="ELO">{{ top_left_r1_g1.team }}
+			<span class="tooltip-label">{{top_left_r1_g1.team}} ELO = {{ top_left_r1_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_left_r2_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r2_g1.team.id %}">
+		<div class="ELO">{{ top_left_r2_g1.team }}
+			<span class="tooltip-label">{{top_left_r2_g1.team}} ELO = {{ top_left_r2_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ top_left_ss_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_ss_g1.team.id %}">
+		<div class="ELO">{{ top_left_ss_g1.team }}
+			<span class="tooltip-label">{{top_left_ss_g1.team}} ELO = {{ top_left_ss_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="16" id="pick_{{ top_left_ee.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_ee.team.id %}">
+		<div class="ELO">{{ top_left_ee.team }}
+			<span class="tooltip-label">{{top_left_ee.team}} ELO = {{ top_left_ee.elo }}</span>
+		</div></a></td>
+	<td rowspan="32" id="pick_{{ ff_left.correct }}">
+		<a href="{% url 'basketball:team_detail' ff_left.team.id %}">
+		<div class="ELO">{{ ff_left.team }}
+			<span class="tooltip-label">{{ff_left.team}} ELO = {{ ff_left.elo }}</span>
+		</div></a></td>
+	<td rowspan="32" id="pick_{{ championship.correct }}">
+		<a href="{% url 'basketball:team_detail' championship.team.id %}">
+		<div class="ELO">{{ championship.team }}
+			<span class="tooltip-label">{{championship.team}} ELO = {{ championship.elo }}</span>
+		</div></a></td>
+	<td rowspan="32" id="pick_{{ ff_right.correct }}">
+		<a href="{% url 'basketball:team_detail' ff_right.team.id %}">
+		<div class="ELO">{{ ff_right.team }}
+			<span class="tooltip-label">{{ff_right.team}} ELO = {{ ff_right.elo }}</span>
+		</div></a></td>
+	<td rowspan="16" id="pick_{{ top_right_ee.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_ee.team.id %}">
+		<div class="ELO">{{ top_right_ee.team }}
+			<span class="tooltip-label">{{top_right_ee.team}} ELO = {{ top_right_ee.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ top_right_ss_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_ss_g1.team.id %}">
+		<div class="ELO">{{ top_right_ss_g1.team }}
+			<span class="tooltip-label">{{top_right_ss_g1.team}} ELO = {{ top_right_ss_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_right_r2_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r2_g1.team.id %}">
+		<div class="ELO">{{ top_right_r2_g1.team }}
+			<span class="tooltip-label">{{top_right_r2_g1.team}} ELO = {{ top_right_r2_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g1.team.id %}">
+		<div class="ELO">{{ top_right_r1_g1.team }}
+			<span class="tooltip-label">{{top_right_r1_g1.team}} ELO = {{ top_right_r1_g1.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_1.team.id %}">
+		<div class="ELO">{{ top_right_1.team }} (1)
+			<span class="tooltip-label">{{top_right_1.team}} ELO = {{ top_right_1.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_16.team.id %}">
+		<div class="ELO">(16) {{ top_left_16.team }}
+			<span class="tooltip-label">{{top_left_16.team}} ELO = {{ top_left_16.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_16.team.id %}">
+		<div class="ELO">{{ top_right_16.team }} (16)
+			<span class="tooltip-label">{{top_right_16.team}} ELO = {{ top_right_16.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_8.team.id %}">
+		<div class="ELO">(8) {{ top_left_8.team }}
+			<span class="tooltip-label">{{top_left_8.team}} ELO = {{ top_left_8.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g2.team.id %}">
+		<div class="ELO">{{ top_left_r1_g2.team }}
+			<span class="tooltip-label">{{top_left_r1_g2.team}} ELO = {{ top_left_r1_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g2.team.id %}">
+		<div class="ELO">{{ top_right_r1_g2.team }}
+			<span class="tooltip-label">{{top_right_r1_g2.team}} ELO = {{ top_right_r1_g2.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_8.team.id %}">
+		<div class="ELO">{{ top_right_8.team }} (8)
+			<span class="tooltip-label">{{top_right_8.team}} ELO = {{ top_right_8.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_9.team.id %}">
+		<div class="ELO">(9) {{ top_left_9.team }}
+			<span class="tooltip-label">{{top_left_9.team}} ELO = {{ top_left_9.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_9.team.id %}">
+		<div class="ELO">{{ top_right_9.team }} (9)
+			<span class="tooltip-label">{{top_right_9.team}} ELO = {{ top_right_9.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_5.team.id %}">
+		<div class="ELO">(5) {{ top_left_5.team }}
+			<span class="tooltip-label">{{top_left_5.team}} ELO = {{ top_left_5.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g3.team.id %}">
+		<div class="ELO">{{ top_left_r1_g3.team }}
+			<span class="tooltip-label">{{top_left_r1_g3.team}} ELO = {{ top_left_r1_g3.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_left_r2_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r2_g2.team.id %}">
+		<div class="ELO">{{ top_left_r2_g2.team }}
+			<span class="tooltip-label">{{top_left_r2_g2.team}} ELO = {{ top_left_r2_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_right_r2_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r2_g2.team.id %}">
+		<div class="ELO">{{ top_right_r2_g2.team }}
+			<span class="tooltip-label">{{top_right_r2_g2.team}} ELO = {{ top_right_r2_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g3.team.id %}">
+		<div class="ELO">{{ top_right_r1_g3.team }}
+			<span class="tooltip-label">{{top_right_r1_g3.team}} ELO = {{ top_right_r1_g3.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_5.team.id %}">
+		<div class="ELO">{{ top_right_5.team }} (5)
+			<span class="tooltip-label">{{top_right_5.team}} ELO = {{ top_right_5.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_12.team.id %}">
+		<div class="ELO">(12) {{ top_left_12.team }}
+			<span class="tooltip-label">{{top_left_12.team}} ELO = {{ top_left_12.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_12.team.id %}">
+		<div class="ELO">{{ top_right_12.team }} (12)
+			<span class="tooltip-label">{{top_right_12.team}} ELO = {{ top_right_12.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_4.team.id %}">
+		<div class="ELO">(4) {{ top_left_4.team }}
+			<span class="tooltip-label">{{top_left_4.team}} ELO = {{ top_left_4.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g4.team.id %}">
+		<div class="ELO">{{ top_left_r1_g4.team }}
+			<span class="tooltip-label">{{top_left_r1_g4.team}} ELO = {{ top_left_r1_g4.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g4.team.id %}">
+		<div class="ELO">{{ top_right_r1_g4.team }}
+			<span class="tooltip-label">{{top_right_r1_g4.team}} ELO = {{ top_right_r1_g4.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_4.team.id %}">
+		<div class="ELO">{{ top_right_4.team }} (4)
+			<span class="tooltip-label">{{top_right_4.team}} ELO = {{ top_right_4.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_13.team.id %}">
+		<div class="ELO">(13) {{ top_left_13.team }}
+			<span class="tooltip-label">{{top_left_13.team}} ELO = {{ top_left_13.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_13.team.id %}">
+		<div class="ELO">{{ top_right_13.team }} (13)
+			<span class="tooltip-label">{{top_right_13.team}} ELO = {{ top_right_13.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_6.team.id %}">
+		<div class="ELO">(6) {{ top_left_6.team }}
+			<span class="tooltip-label">{{top_left_6.team}} ELO = {{ top_left_6.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g5.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g5.team.id %}">
+		<div class="ELO">{{ top_left_r1_g5.team }}
+			<span class="tooltip-label">{{top_left_r1_g5.team}} ELO = {{ top_left_r1_g5.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_left_r2_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r2_g3.team.id %}">
+		<div class="ELO">{{ top_left_r2_g3.team }}
+			<span class="tooltip-label">{{top_left_r2_g3.team}} ELO = {{ top_left_r2_g3.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ top_left_ss_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_ss_g2.team.id %}">
+		<div class="ELO">{{ top_left_ss_g2.team }}
+			<span class="tooltip-label">{{top_left_ss_g2.team}} ELO = {{ top_left_ss_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ top_right_ss_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_ss_g2.team.id %}">
+		<div class="ELO">{{ top_right_ss_g2.team }}
+			<span class="tooltip-label">{{top_right_ss_g2.team}} ELO = {{ top_right_ss_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_right_r2_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r2_g3.team.id %}">
+		<div class="ELO">{{ top_right_r2_g3.team }}
+			<span class="tooltip-label">{{top_right_r2_g3.team}} ELO = {{ top_right_r2_g3.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g5.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g5.team.id %}">
+		<div class="ELO">{{ top_right_r1_g5.team }}
+			<span class="tooltip-label">{{top_right_r1_g5.team}} ELO = {{ top_right_r1_g5.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_6.team.id %}">
+		<div class="ELO">{{ top_right_6.team }} (6)
+			<span class="tooltip-label">{{top_right_6.team}} ELO = {{ top_right_6.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_11.team.id %}">
+		<div class="ELO">(11) {{ top_left_11.team }}
+			<span class="tooltip-label">{{top_left_11.team}} ELO = {{ top_left_11.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_11.team.id %}">
+		<div class="ELO">{{ top_right_11.team }} (11)
+			<span class="tooltip-label">{{top_right_11.team}} ELO = {{ top_right_11.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_3.team.id %}">
+		<div class="ELO">(3) {{ top_left_3.team }}
+			<span class="tooltip-label">{{top_left_3.team}} ELO = {{ top_left_3.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g6.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g6.team.id %}">
+		<div class="ELO">{{ top_left_r1_g6.team }}
+			<span class="tooltip-label">{{top_left_r1_g6.team}} ELO = {{ top_left_r1_g6.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g6.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g6.team.id %}">
+		<div class="ELO">{{ top_right_r1_g6.team }}
+			<span class="tooltip-label">{{top_right_r1_g6.team}} ELO = {{ top_right_r1_g6.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_3.team.id %}">
+		<div class="ELO">{{ top_right_3.team }} (3)
+			<span class="tooltip-label">{{top_right_3.team}} ELO = {{ top_right_3.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_14.team.id %}">
+		<div class="ELO">(14) {{ top_left_14.team }}
+			<span class="tooltip-label">{{top_left_14.team}} ELO = {{ top_left_14.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_14.team.id %}">
+		<div class="ELO">{{ top_right_14.team }} (14)
+			<span class="tooltip-label">{{top_right_14.team}} ELO = {{ top_right_14.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_7.team.id %}">
+		<div class="ELO">(7) {{ top_left_7.team }}
+			<span class="tooltip-label">{{top_left_7.team}} ELO = {{ top_left_7.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g7.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g7.team.id %}">
+		<div class="ELO">{{ top_left_r1_g7.team }}
+			<span class="tooltip-label">{{top_left_r1_g7.team}} ELO = {{ top_left_r1_g7.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_left_r2_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r2_g4.team.id %}">
+		<div class="ELO">{{ top_left_r2_g4.team }}
+			<span class="tooltip-label">{{top_left_r2_g4.team}} ELO = {{ top_left_r2_g4.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ top_right_r2_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r2_g4.team.id %}">
+		<div class="ELO">{{ top_right_r2_g4.team }}
+			<span class="tooltip-label">{{top_right_r2_g4.team}} ELO = {{ top_right_r2_g4.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g7.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g7.team.id %}">
+		<div class="ELO">{{ top_right_r1_g7.team }}
+			<span class="tooltip-label">{{top_right_r1_g7.team}} ELO = {{ top_right_r1_g7.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_7.team.id %}">
+		<div class="ELO">{{ top_right_7.team }} (7)
+			<span class="tooltip-label">{{top_right_7.team}} ELO = {{ top_right_7.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_10.team.id %}">
+		<div class="ELO">(10) {{ top_left_10.team }}
+			<span class="tooltip-label">{{top_left_10.team}} ELO = {{ top_left_10.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_10.team.id %}">
+		<div class="ELO">{{ top_right_10.team }} (10)
+			<span class="tooltip-label">{{top_right_10.team}} ELO = {{ top_right_10.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_2.team.id %}">
+		<div class="ELO">(2) {{ top_left_2.team }}
+			<span class="tooltip-label">{{top_left_2.team}} ELO = {{ top_left_2.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_left_r1_g8.correct }}">
+		<a href="{% url 'basketball:team_detail' top_left_r1_g8.team.id %}">
+		<div class="ELO">{{ top_left_r1_g8.team }}
+			<span class="tooltip-label">{{top_left_r1_g8.team}} ELO = {{ top_left_r1_g8.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ top_right_r1_g8.correct }}">
+		<a href="{% url 'basketball:team_detail' top_right_r1_g8.team.id %}">
+		<div class="ELO">{{ top_right_r1_g8.team }}
+			<span class="tooltip-label">{{top_right_r1_g8.team}} ELO = {{ top_right_r1_g8.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_2.team.id %}">
+		<div class="ELO">{{ top_right_2.team }} (2)
+			<span class="tooltip-label">{{top_right_2.team}} ELO = {{ top_right_2.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' top_left_15.team.id %}">
+		<div class="ELO">(15) {{ top_left_15.team }}
+			<span class="tooltip-label">{{top_left_15.team}} ELO = {{ top_left_15.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' top_right_15.team.id %}">
+		<div class="ELO">{{ top_right_15.team }} (15)
+			<span class="tooltip-label">{{top_right_15.team}} ELO = {{ top_right_15.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_1.team.id %}">
+		<div class="ELO">(1) {{ bottom_left_1.team }}
+			<span class="tooltip-label">{{bottom_left_1.team}} ELO = {{ bottom_left_1.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g1.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g1.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g1.team}} ELO = {{ bottom_left_r1_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_left_r2_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r2_g1.team.id %}">
+		<div class="ELO">{{ bottom_left_r2_g1.team }}
+			<span class="tooltip-label">{{bottom_left_r2_g1.team}} ELO = {{ bottom_left_r2_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ bottom_left_ss_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_ss_g1.team.id %}">
+		<div class="ELO">{{ bottom_left_ss_g1.team }}
+			<span class="tooltip-label">{{bottom_left_ss_g1.team}} ELO = {{ bottom_left_ss_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="16" id="pick_{{ bottom_left_ee.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_ee.team.id %}">
+		<div class="ELO">{{ bottom_left_ee.team }}
+			<span class="tooltip-label">{{bottom_left_ee.team}} ELO = {{ bottom_left_ee.elo }}</span>
+		</div></a></td>
+	<td rowspan="16" id="pick_{{ bottom_right_ee.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_ee.team.id %}">
+		<div class="ELO">{{ bottom_right_ee.team }}
+			<span class="tooltip-label">{{bottom_right_ee.team}} ELO = {{ bottom_right_ee.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ bottom_right_ss_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_ss_g1.team.id %}">
+		<div class="ELO">{{ bottom_right_ss_g1.team }}
+			<span class="tooltip-label">{{bottom_right_ss_g1.team}} ELO = {{ bottom_right_ss_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_right_r2_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r2_g1.team.id %}">
+		<div class="ELO">{{ bottom_right_r2_g1.team }}
+			<span class="tooltip-label">{{bottom_right_r2_g1.team}} ELO = {{ bottom_right_r2_g1.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g1.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g1.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g1.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g1.team}} ELO = {{ bottom_right_r1_g1.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_1.team.id %}">
+		<div class="ELO">{{ bottom_right_1.team }} (1)
+			<span class="tooltip-label">{{bottom_right_1.team}} ELO = {{ bottom_right_1.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_16.team.id %}">
+		<div class="ELO">(16) {{ bottom_left_16.team }}
+			<span class="tooltip-label">{{bottom_left_16.team}} ELO = {{ bottom_left_16.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_16.team.id %}">
+		<div class="ELO">{{ bottom_right_16.team }} (16)
+			<span class="tooltip-label">{{bottom_right_16.team}} ELO = {{ bottom_right_16.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_8.team.id %}">
+		<div class="ELO">(8) {{ bottom_left_8.team }}
+			<span class="tooltip-label">{{bottom_left_8.team}} ELO = {{ bottom_left_8.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g2.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g2.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g2.team}} ELO = {{ bottom_left_r1_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g2.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g2.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g2.team}} ELO = {{ bottom_right_r1_g2.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_8.team.id %}">
+		<div class="ELO">{{ bottom_right_8.team }} (8)
+			<span class="tooltip-label">{{bottom_right_8.team}} ELO = {{ bottom_right_8.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_9.team.id %}">
+		<div class="ELO">(9) {{ bottom_left_9.team }}
+			<span class="tooltip-label">{{bottom_left_9.team}} ELO = {{ bottom_left_9.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_9.team.id %}">
+		<div class="ELO">{{ bottom_right_9.team }} (9)
+			<span class="tooltip-label">{{bottom_right_9.team}} ELO = {{ bottom_right_9.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_5.team.id %}">
+		<div class="ELO">(5) {{ bottom_left_5.team }}
+			<span class="tooltip-label">{{bottom_left_5.team}} ELO = {{ bottom_left_5.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g3.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g3.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g3.team}} ELO = {{ bottom_left_r1_g3.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_left_r2_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r2_g2.team.id %}">
+		<div class="ELO">{{ bottom_left_r2_g2.team }}
+			<span class="tooltip-label">{{bottom_left_r2_g2.team}} ELO = {{ bottom_left_r2_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_right_r2_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r2_g2.team.id %}">
+		<div class="ELO">{{ bottom_right_r2_g2.team }}
+			<span class="tooltip-label">{{bottom_right_r2_g2.team}} ELO = {{ bottom_right_r2_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g3.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g3.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g3.team}} ELO = {{ bottom_right_r1_g3.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_5.team.id %}">
+		<div class="ELO">{{ bottom_right_5.team }} (5)
+			<span class="tooltip-label">{{bottom_right_5.team}} ELO = {{ bottom_right_5.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_12.team.id %}">
+		<div class="ELO">(12) {{ bottom_left_12.team }}
+			<span class="tooltip-label">{{bottom_left_12.team}} ELO = {{ bottom_left_12.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_12.team.id %}">
+		<div class="ELO">{{ bottom_right_12.team }} (12)
+			<span class="tooltip-label">{{bottom_right_12.team}} ELO = {{ bottom_right_12.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_4.team.id %}">
+		<div class="ELO">(4) {{ bottom_left_4.team }}
+			<span class="tooltip-label">{{bottom_left_4.team}} ELO = {{ bottom_left_4.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g4.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g4.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g4.team}} ELO = {{ bottom_left_r1_g4.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g4.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g4.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g4.team}} ELO = {{ bottom_right_r1_g4.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_4.team.id %}">
+		<div class="ELO">{{ bottom_right_4.team }} (4)
+			<span class="tooltip-label">{{bottom_right_4.team}} ELO = {{ bottom_right_4.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_13.team.id %}">
+		<div class="ELO">(13) {{ bottom_left_13.team }}
+			<span class="tooltip-label">{{bottom_left_13.team}} ELO = {{ bottom_left_13.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_13.team.id %}">
+		<div class="ELO">{{ bottom_right_13.team }} (13)
+			<span class="tooltip-label">{{bottom_right_13.team}} ELO = {{ bottom_right_13.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_6.team.id %}">
+		<div class="ELO">(6) {{ bottom_left_6.team }}
+			<span class="tooltip-label">{{bottom_left_6.team}} ELO = {{ bottom_left_6.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g5.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g5.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g5.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g5.team}} ELO = {{ bottom_left_r1_g5.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_left_r2_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r2_g3.team.id %}">
+		<div class="ELO">{{ bottom_left_r2_g3.team }}
+			<span class="tooltip-label">{{bottom_left_r2_g3.team}} ELO = {{ bottom_left_r2_g3.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ bottom_left_ss_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_ss_g2.team.id %}">
+		<div class="ELO">{{ bottom_left_ss_g2.team }}
+			<span class="tooltip-label">{{bottom_left_ss_g2.team}} ELO = {{ bottom_left_ss_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="8" id="pick_{{ bottom_right_ss_g2.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_ss_g2.team.id %}">
+		<div class="ELO">{{ bottom_right_ss_g2.team }}
+			<span class="tooltip-label">{{bottom_right_ss_g2.team}} ELO = {{ bottom_right_ss_g2.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_right_r2_g3.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r2_g3.team.id %}">
+		<div class="ELO">{{ bottom_right_r2_g3.team }}
+			<span class="tooltip-label">{{bottom_right_r2_g3.team}} ELO = {{ bottom_right_r2_g3.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g5.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g5.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g5.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g5.team}} ELO = {{ bottom_right_r1_g5.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_6.team.id %}">
+		<div class="ELO">{{ bottom_right_6.team }} (6)
+			<span class="tooltip-label">{{bottom_right_6.team}} ELO = {{ bottom_right_6.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_11.team.id %}">
+		<div class="ELO">(11) {{ bottom_left_11.team }}
+			<span class="tooltip-label">{{bottom_left_11.team}} ELO = {{ bottom_left_11.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_11.team.id %}">
+		<div class="ELO">{{ bottom_right_11.team }} (11)
+			<span class="tooltip-label">{{bottom_right_11.team}} ELO = {{ bottom_right_11.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_3.team.id %}">
+		<div class="ELO">(3) {{ bottom_left_3.team }}
+			<span class="tooltip-label">{{bottom_left_3.team}} ELO = {{ bottom_left_3.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g6.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g6.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g6.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g6.team}} ELO = {{ bottom_left_r1_g6.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g6.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g6.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g6.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g6.team}} ELO = {{ bottom_right_r1_g6.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_3.team.id %}">
+		<div class="ELO">{{ bottom_right_3.team }} (3)
+			<span class="tooltip-label">{{bottom_right_3.team}} ELO = {{ bottom_right_3.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_14.team.id %}">
+		<div class="ELO">(14) {{ bottom_left_14.team }}
+			<span class="tooltip-label">{{bottom_left_14.team}} ELO = {{ bottom_left_14.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_14.team.id %}">
+		<div class="ELO">{{ bottom_right_14.team }} (14)
+			<span class="tooltip-label">{{bottom_right_14.team}} ELO = {{ bottom_right_14.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_7.team.id %}">
+		<div class="ELO">(7) {{ bottom_left_7.team }}
+			<span class="tooltip-label">{{bottom_left_7.team}} ELO = {{ bottom_left_7.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g7.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g7.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g7.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g7.team}} ELO = {{ bottom_left_r1_g7.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_left_r2_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r2_g4.team.id %}">
+		<div class="ELO">{{ bottom_left_r2_g4.team }}
+			<span class="tooltip-label">{{bottom_left_r2_g4.team}} ELO = {{ bottom_left_r2_g4.elo }}</span>
+		</div></a></td>
+	<td rowspan="4" id="pick_{{ bottom_right_r2_g4.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r2_g4.team.id %}">
+		<div class="ELO">{{ bottom_right_r2_g4.team }}
+			<span class="tooltip-label">{{bottom_right_r2_g4.team}} ELO = {{ bottom_right_r2_g4.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g7.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g7.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g7.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g7.team}} ELO = {{ bottom_right_r1_g7.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_7.team.id %}">
+		<div class="ELO">{{ bottom_right_7.team }} (7)
+			<span class="tooltip-label">{{bottom_right_7.team}} ELO = {{ bottom_right_7.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_10.team.id %}">
+		<div class="ELO">(10) {{ bottom_left_10.team }}
+			<span class="tooltip-label">{{bottom_left_10.team}} ELO = {{ bottom_left_10.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_10.team.id %}">
+		<div class="ELO">{{ bottom_right_10.team }} (10)
+			<span class="tooltip-label">{{bottom_right_10.team}} ELO = {{ bottom_right_10.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_2.team.id %}">
+		<div class="ELO">(2) {{ bottom_left_2.team }}
+			<span class="tooltip-label">{{bottom_left_2.team}} ELO = {{ bottom_left_2.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_left_r1_g8.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_left_r1_g8.team.id %}">
+		<div class="ELO">{{ bottom_left_r1_g8.team }}
+			<span class="tooltip-label">{{bottom_left_r1_g8.team}} ELO = {{ bottom_left_r1_g8.elo }}</span>
+		</div></a></td>
+	<td rowspan="2" id="pick_{{ bottom_right_r1_g8.correct }}">
+		<a href="{% url 'basketball:team_detail' bottom_right_r1_g8.team.id %}">
+		<div class="ELO">{{ bottom_right_r1_g8.team }}
+			<span class="tooltip-label">{{bottom_right_r1_g8.team}} ELO = {{ bottom_right_r1_g8.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_2.team.id %}">
+		<div class="ELO">{{ bottom_right_2.team }} (2)
+			<span class="tooltip-label">{{bottom_right_2.team}} ELO = {{ bottom_right_2.elo }}</span>
+		</div></a></td>
+	</tr>
+	<tr>
+	<td style="text-align:left"><a href="{% url 'basketball:team_detail' bottom_left_15.team.id %}">
+		<div class="ELO">(15) {{ bottom_left_15.team }}
+			<span class="tooltip-label">{{bottom_left_15.team}} ELO = {{ bottom_left_15.elo }}</span>
+		</div></a></td>
+	<td style="text-align:right"><a href="{% url 'basketball:team_detail' bottom_right_15.team.id %}">
+		<div class="ELO">{{ bottom_right_15.team }} (15)
+			<span class="tooltip-label">{{bottom_right_15.team}} ELO = {{ bottom_right_15.elo }}</span>
+		</div></a></td>
+	</table>
+	</div>
+{% endblock %}

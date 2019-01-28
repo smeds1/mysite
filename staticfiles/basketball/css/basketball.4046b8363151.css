@@ -1,0 +1,69 @@
+.table-wrapper {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.all_teams {
+  width: 100%;
+}
+.all_teams th {
+  background-color: #000000;
+  color: white;
+}
+
+#team-info {
+  background-color: honeydew;
+}
+#team-info td, #team-info th {
+  text-align: left;
+}
+
+.tournament-stats {
+  background-color: #FFCC80;
+}
+
+table#bracket {
+  font-size: 0.7em;
+  width: 100%;
+}
+table#bracket td, table#bracket tr {
+  padding: 0.1em;
+}
+table#bracket th {
+  color: #000000;
+  font-size: 1.5em;
+}
+
+td#pick_True {
+  background-color: #CCFFCC;
+}
+
+td#pick_False {
+  background-color: #FFCCCC;
+}
+
+.ELO {
+  position: relative;
+}
+
+.ELO:hover .tooltip-label {
+  visibility: visible;
+  width: 180px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.graph-link {
+  color: #007a99;
+  text-decoration: none;
+  cursor: pointer;
+  mark: none;
+}
+
+.graph-link:hover {
+  color: #00CCFF;
+}
+
+/*# sourceMappingURL=basketball.css.map */

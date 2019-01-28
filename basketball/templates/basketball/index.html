@@ -1,0 +1,43 @@
+{% extends 'basketball/layout.html' %}
+
+{% block title %}
+	Basketball Project
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<h3>March Madness Sadness</h3>
+				<p>Every year my mom, my aunt, and I fill out March Madness brackets and
+				trash talk each other throughout the tournament. Despite the small pool
+				of participants, I haven't managed to win a tournament since 2009. This
+			  project is my attempt to explore and analyze college basketball tournament
+			  data with the goal of improving my future performance in the family pool.</p>
+
+				<h5>ELO Ratings</h5>
+				<p>ELO is a rating system initially developed to rate the ability of
+					chess players. Each team starts the season at 1500. A team's score rises
+					if they win a game and falls if they lose a game. Beating a high-ranked
+					opponent causes a team's score to rise more than beating a low-ranked
+					opponent. Mathematical details can be found at
+					<a target="_blank" href='https://en.wikipedia.org/wiki/Elo_rating_system'>
+					Wikipedia</a>. For this application, I used a <i>K</i> value of 24.</p>
+			</div>
+			{% if leaders %}
+				<div class="col-sm-4">
+					<table class="table-sm table-striped table-bordered">
+						<thead>
+							<tr><th colspan="2" class="long_header">Tournament Wins Since 2006</th></tr>
+						</thead>
+						<tbody>
+							{% for entry in leaders %}
+								<tr><td><a href="{% url 'basketball:participant' entry.1 %}">{{ entry.1|title }}</a></td><td> {{ entry.0 }}</td></tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'basketball/layout.html' %}
+{% load static %}
+
+{% block title %}
+	Basketball: {{ person.name|title }}
+{% endblock %}
+
+{% block load_scripts %}
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script type="text/javascript" src="{% static 'basketball/js/participant.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+  <div id="json_finish_data" data-js-vars="{{ json_finish_data }}">
+  <script>
+    var finish_data = JSON.parse(document.getElementById('json_finish_data').getAttribute('data-js-vars') || '{}');
+  </script>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <table class="table table-sm table-bordered">
+          <thead><tr><th colspan=2 class="long_header">{{ person.name|title }}</th></tr></thead>
+          <tbody>
+            <tr>
+							<td>First Place Finishes</td>
+							<td class="numeric">{{person.first_place}}</td>
+						</tr>
+            <tr>
+							<td>Number of Correct National Champions</td>
+							<td class="numeric">{{person.correct_champions}}</td>
+						</tr>
+            <tr>
+							<td>Average Number of Predicted Upsets</td>
+							<td class="numeric">{{person.average_predicted_upsets|floatformat}}</td>
+						</tr>
+						<tr>
+							<td>Average Number of Correct Upsets</td>
+							<td class="numeric">{{person.average_correct_upsets|floatformat}}</td>
+						</tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-6">
+        <svg id="finishes_svg">
+      </div>
+    </div>
+  </div>
+{% endblock %}

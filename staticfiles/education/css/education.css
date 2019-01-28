@@ -1,0 +1,15 @@
+.state {
+  fill: none;
+  stroke: #2e2e1f;
+  stroke-width: 1;
+}
+
+.legendEntry {
+  stroke-width: 1;
+  font-size: 0.9em;
+}
+.legendEntry rect {
+  stroke: black;
+}
+
+/*# sourceMappingURL=education.css.map */

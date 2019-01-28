@@ -1,0 +1,55 @@
+{% extends 'basketball/layout.html' %}
+{% load static %}
+
+{% block title %}
+	Basketball: {{ year }} Tournament
+{% endblock %}
+
+{% block load_scripts %}
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script type="text/javascript" src="{% static 'basketball/js/teamsInTournament.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+	<div id="json-data" data-js-vars="{{ json_data }}">
+	<script>
+    var teams_in_tournament = JSON.parse(document.getElementById('json-data').getAttribute('data-js-vars') || '{}');
+  </script>
+	<div class="container">
+		<div class="row">
+			{% if actual %}
+				<div class="col-lg-4">
+					<table class="table table-sm table-bordered">
+						<thead><tr><th colspan=2 class="long_header">{{ year }} Tournament</th></tr></thead>
+						<tbody>
+							<tr><th>Winner</th><td><a href="{% url 'basketball:team_detail' actual.championship.id %}">{{ actual.championship }}</a></td></tr>
+							<tr><th>Upsets</th><td>{{ upsets }}</td></tr>
+							<tr><th>Full Results</th><td><a href="{% url 'basketball:bracket' actual.id %}">Results</a></td></tr>
+						</tbody>
+					</table>
+					<br>
+					<table class="table table-sm table-bordered">
+					<tr><th colspan="2" class="long_header">Final Standings</th></tr>
+				    {% for bracket in brackets %}
+						<tr><td>
+							{% if bracket.name in participants %}
+								<a href="{% url 'basketball:participant' bracket.name %}">{{ bracket.name|title }}</a>
+							{% else %}
+								{{ bracket.name|title }}
+							{% endif %}
+							</td>
+						<td>{{ bracket.score }} <a href="{% url 'basketball:bracket' bracket.id %}" style="font-size:0.6em">(Bracket)</a></td>
+						<tr>
+				    {% endfor %}
+					</table>
+				</div>
+				<div class="col-lg-8" id="teamsintournament_svg">
+					<svg></svg>
+				</div>
+			{% else %}
+			    <p>No tournament data available for {{ year }}.</p>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

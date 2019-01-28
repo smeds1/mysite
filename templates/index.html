@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+	Smeds Project Page
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+		<div class="row">
+			<div class="col-sm">
+    		<h3>My Projects</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+		    <h6><a href="{% url 'basketball:index' %}">Basketball</a></h6>
+		    <p>This project is a summary of my family's NCAA March Madness Tournament
+		      history with tools for analyzing team data and tournament history.
+		      The data was obtained from
+		      <a target="_blank" href='https://www.kaggle.com/ncaa/ncaa-basketball'>
+		        Kaggle's</a> NCAA Basketball database. The application contains:</p>
+		    <ul>
+		      <li>A record of every tournament game since 2006</li>
+		      <li>Tournament history for each team</li>
+		      <li>ELO ratings (chess rating system) for every Division I team for each season since 2006</li>
+		      <li>Graphs of aggregate tournament data</li>
+		    </ul>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+		    <h6><a href="{% url 'education:index' %}">Education</a></h6>
+		    <p>This project is a look at the high school graduation rates for the
+		      2015-2016 school year. The data was obtained from the
+		      <a target="_blank" href='https://www2.ed.gov/about/inits/ed/edfacts/data-files/index.html'>
+		        U.S. Department of Education</a>. This application contains:</p>
+		    <ul>
+		      <li>A record of graduation rates and demographic population distributions in each U.S. state</li>
+		      <li>Graduation rates by demographic</li>
+		      <li>Choropleth heat maps for easy comparison of populations and rates between U.S. states</li>
+		    </ul>
+			</div>
+		</div>
+  </div>
+{% endblock %}

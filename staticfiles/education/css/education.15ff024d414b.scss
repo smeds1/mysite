@@ -1,0 +1,20 @@
+$color1: #000000; //black
+$color2: #000066; //navy
+$textcolor: #000000; //black
+$linkcolor: #007a99; //blue
+$hovercolor: #00CCFF; //bright blue
+
+.state{
+  fill: none;
+  stroke: #2e2e1f;
+  stroke-width: 1;
+}
+
+.legendEntry {
+  stroke-width: 1;
+  font-size: 0.9em;
+
+  rect {
+    stroke: black;
+  }
+}

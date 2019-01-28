@@ -1,0 +1,190 @@
+$color1: #000000; //black
+$color2: #000066; //navy
+$textcolor: #000000; //black
+$linkcolor: #007a99; //blue
+$hovercolor: #00CCFF; //bright blue
+$graphhovorcolor: #FFCC66; //beige
+
+//main elements of any page
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  color: $textcolor;
+}
+
+h1, h2, h3, h4, h5, h6{
+	color: $textcolor;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2.25em;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+h4 {
+  font-size: 1.75em;
+}
+
+h5 {
+  font-size: 1.5em;
+}
+
+h6 {
+  font-size: 1.25em;
+}
+
+p {
+  font-size: .95em;
+  font-weight: normal;
+}
+
+li {
+  font-size: .95em;
+  font-weight: normal;
+}
+
+a {
+  color: $linkcolor;
+}
+
+a:hover, a:active {
+  color: $hovercolor;
+  text-decoration: none;
+}
+
+text {
+  fill: $textcolor;
+}
+
+table {
+
+  .long_header{
+    text-align: center;
+  }
+
+  .numeric {
+    text-align: right;
+  }
+
+  .string {
+    text-align: left;
+  }
+}
+
+//navbar
+.nav-item.active a {
+  color: $hovercolor;
+}
+
+.navbar {
+  background-color: $color1;
+
+  a {
+    color: white;
+  }
+
+  a:hover {
+    color: gray;
+  }
+
+  @media (min-width: 576px) {
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  }
+
+  .dropdown-menu {
+    margin-top: 0;
+
+    a {
+      color: $textcolor;
+    }
+  }
+}
+
+//assorted classes
+.container {
+  padding-top: 0.5em;
+}
+
+.btn-sm {
+  color: $textcolor;
+}
+
+.padded_div {
+  padding: 0.5em;
+}
+
+//graph elements
+.graph-title {
+  font-size: 1em;
+  text-anchor: middle;
+}
+
+.graph-label {
+  font-size: 0.9em;
+  text-anchor: middle;
+}
+
+.graph-line {
+  stroke: $color2;
+  fill: none;
+  stroke-width: 2;
+}
+
+.graph-grid {
+  line {
+    stroke: $textcolor;
+    stroke-opacity: 0.5;
+  }
+  path {
+    stroke-width: 0;
+  }
+}
+
+.graph-circle {
+  fill: $color2;
+  r: 5;
+}
+
+.graph-circle:hover {
+  fill: $graphhovorcolor;
+}
+
+.graph-bar {
+  fill: $color2;
+}
+
+.graph-bar:hover {
+  fill: $graphhovorcolor;
+}
+
+.tooltip-label {
+  color: $textcolor;
+	position: absolute;
+	visibility: hidden;
+  z-index: 10000;
+  width: auto;
+  height: auto;
+  padding: 5px;
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  white-space: pre;
+
+  td {
+    padding: 2px;
+  }
+}

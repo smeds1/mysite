@@ -1,0 +1,45 @@
+{% extends 'education/layout.html' %}
+{% load static %}
+
+{% block title %}
+	Education Project
+{% endblock %}
+
+{% block body %}
+	{% if json_data %}
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+	  <script src="{% static 'education/js/usmap.js' %}"></script>
+		<script type="text/javascript" src="{% static 'education/js/index.js' %}"></script>
+		<div id="json-data" data-js-vars="{{ json_data }}"></div>
+		<script>
+		    var rate_data = JSON.parse(document.getElementById('json-data').getAttribute('data-js-vars') || '{}');
+		</script>
+	{% endif %}
+	<div class="tooltip-label"></div>
+	<div class="container">
+		<div class="row">
+      <div class="col-lg-6">
+				<h3>High School Graduation</h3>
+				<p>This project explores the public high school graduation rates in the United
+				States for the 2015-2016 school year in an attempt to better understand
+				what factors (such as race or economic status) influence whether or not
+				students complete their high school education. </p>
+
+				<h5>How Rates Were Calculated</h5>
+				<p>Schools report the exact number of students that fall into certain
+					demographics (such as "economically disadvantaged") but they are not
+					required to report the exact number of students from that group that
+			 		graduate. Instead, they can report a range such as "85%-89%"" or "Less
+			 		than 50%". In cases where there are fewer than ten students in a group,
+		 			the percentage is not reported at all to protect the privacy of the students.
+	 				To estimate the graduation rates, I used the middle value in each reported
+		 			range and omitted the students where no range was given.</p>
+			</div>
+			{% if json_data %}
+				<div class="col-lg-6">
+					<svg id="graduation_rate_map"></svg>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

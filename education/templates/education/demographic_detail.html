@@ -1,0 +1,36 @@
+{% extends 'education/layout.html' %}
+{% load static %}
+
+{% block title %}
+	Education: {{group|title}}
+{% endblock %}
+
+{% block body %}
+	{% if json_population_data|length > 2 %}
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="{% static 'education/js/usmap.js' %}"></script>
+		<script type="text/javascript" src="{% static 'education/js/demographicDetails.js' %}"></script>
+		<div id="json-population-data" data-js-vars="{{ json_population_data }}"></div>
+		<div id="json-rate-data" data-js-vars="{{ json_rate_data }}"></div>
+		<script>
+		    var population_data = JSON.parse(document.getElementById('json-population-data').getAttribute('data-js-vars') || '{}');
+				var rate_data = JSON.parse(document.getElementById('json-rate-data').getAttribute('data-js-vars') || '{}');
+				var group = "{{group}}";
+		</script>
+	{% endif %}
+	<div class="tooltip-label"></div>
+	<div class="container">
+		{% if json_population_data|length > 2 %}
+	    <div class="row">
+	      <div class="col-lg-6">
+	        <svg id="popsvg"></svg>
+	      </div>
+				<div class="col-lg-6">
+	        <svg id="ratesvg"></svg>
+	      </div>
+			</div>
+		{% else %}
+			<p>No Data Available</p>
+		{% endif %}
+	</div>
+{% endblock %}

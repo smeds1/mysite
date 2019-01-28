@@ -1,0 +1,40 @@
+{% extends 'education/layout.html' %}
+{% load education_extras %}
+{% load humanize %}
+
+{% block title %}
+	Education: U.S. States
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				{% if states %}
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th class="string">State</th>
+								<th class="numeric">Graduation Rate</th>
+								<th class="numeric">Number of Public High Schools</th>
+								<th class="numeric">Total Students in 2015-2016 Cohort </th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for state in states %}
+								<tr>
+									<td class="string"><a href="{% url 'education:state_detail' state.state %}">{{state.state|long_state}}</a></td>
+									<td class="numeric">{{state.all_rate|percentage}}</td>
+									<td class="numeric">{{state.num_schools|intcomma}}</td>
+									<td class="numeric">{{state.all_cohort|intcomma}}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					{% else %}
+						<p>No Data Available</p>
+					{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

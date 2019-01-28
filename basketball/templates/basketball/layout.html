@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/ico" href="{% static 'mysite/img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'mysite/css/mysite.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'basketball/css/basketball.css' %}">
+    <script type="text/javascript" src="{% static 'basketball/js/basketball.js' %}"></script>
+
+    {% block load_scripts %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'mysite/img/letter_s.png' %}" width="35" height="35" alt="Smeds Home Icon"></a>
+      <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'basketball:index' %}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="{% url 'basketball:tournaments' %}">Tournaments</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2018' %}">2018</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2017' %}">2017</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2016' %}">2016</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2015' %}">2015</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2014' %}">2014</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2013' %}">2013</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2012' %}">2012</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2011' %}">2011</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2010' %}">2010</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2009' %}">2009</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2008' %}">2008</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2007' %}">2007</a>
+              <a class="dropdown-item" href="{% url 'basketball:tournament_detail' '2006' %}">2006</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'basketball:teams' %}">Teams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'basketball:stats' %}">Explore the Data</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
