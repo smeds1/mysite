@@ -165,6 +165,8 @@ class EducationDemographicDetailsViewTest(TestCase):
         """
         response = self.client.get(reverse('education:demographic_detail',args=("XYZ",)))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context.get("json_rate_data"), None)
+        self.assertNotEqual(response.context.get("message"), None)
         self.assertContains(response, "Home")
         self.assertContains(response, "Error: No such group XYZ")
         self.assertNotContains(response, '<svg id="popsvg">')
@@ -177,17 +179,23 @@ class EducationDemographicDetailsViewTest(TestCase):
         for demo in State.GROUP_NAMES:
             response = self.client.get(reverse('education:demographic_detail',args=(demo,)))
             self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.context.get("json_rate_data"), None)
+            self.assertNotEqual(response.context.get("message"), None)
             self.assertContains(response, "Home")
             self.assertContains(response, "No Data Available")
             self.assertNotContains(response, '<svg id="popsvg">')
 
     def test_with_data(self):
         """
+        Make sure all demographic pages render if there is data in the database.
         """
         create_states()
         for demo in State.GROUP_NAMES:
             response = self.client.get(reverse('education:demographic_detail',args=(demo,)))
             self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.context.get("group"), State.GROUP_NAMES[demo])
+            self.assertNotEqual(response.context.get("json_rate_data"), None)
+            self.assertNotEqual(response.context.get("json_population_data"), None)
             self.assertContains(response, "Home")
             self.assertNotContains(response, "No Data Available")
             self.assertContains(response, '<svg id="popsvg">')

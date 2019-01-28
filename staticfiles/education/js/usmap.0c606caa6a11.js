@@ -85,7 +85,7 @@
 			.data(uStatePaths)
 			.enter()
 			.append("path")
-			.attr("class",d => `state ${d.n}`)
+			.attr("class",`state ${d => d.n}`)
 			.attr("d", d => d.d)
 			.style("fill", d => data[d.id].color)
 			.on("mouseover", mouseOver)

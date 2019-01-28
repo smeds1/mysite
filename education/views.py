@@ -97,6 +97,10 @@ def demographic_detail(request, group):
         return render(request, 'education/error.html', {"message": message})
 
     data = State.objects.exclude(state__in=['BI','DC'])
+    if not data:
+        message = "No Data Available"
+        return render(request, 'education/error.html', {"message": message})
+
     population_data = []
     rate_data = []
     for row in data:

@@ -95,13 +95,13 @@ class SeleniumEducationTests(LiveServerTestCase):
         map = self.selenium.find_element_by_id("graduation_rate_map")
         title = self.selenium.find_elements_by_class_name("graph-title")[0]
         self.assertEqual(title.text, "High School Graduation Rates for 2015-2016")
-        washington = self.selenium.find_element_by_id("Washington")
+        washington = self.selenium.find_elements_by_class_name("Washington")[0]
         self.assertIn("rgb(247, 251, 255)",washington.get_attribute("style"))
         ActionChains(self.selenium).move_to_element(washington).perform()
         tooltip = self.selenium.find_elements_by_class_name("tooltip-label")[0]
         self.assertIn("Washington",tooltip.text)
         self.assertIn("60.0%",tooltip.text)
-        washington = self.selenium.find_element_by_id("Washington")
+        washington = self.selenium.find_elements_by_class_name("Washington")[0]
         self.assertIn("rgb(255, 204, 102)",washington.get_attribute("style"))
 
     def test_states_links(self):
@@ -177,4 +177,38 @@ class SeleniumEducationTests(LiveServerTestCase):
             else:
                 self.assertIn("10.0%",tooltip.text)
             self.assertIn("rgb(255, 204, 102)",bar.value_of_css_property("fill"))
+        self.selenium.find_element_by_link_text('Home').click()
+
+    def test_demographics_detail_svg(self):
+        """
+        Make sure demographics detail pages graphs render and are hoverable
+        """
+        for group in DEMOGRAPHICS:
+            self.selenium.find_element_by_link_text('Demographics').click()
+            self.selenium.find_element_by_link_text(group).click()
+            self.selenium.find_element_by_id("popsvg")
+            title = self.selenium.find_elements_by_class_name("graph-title")[0]
+            self.assertEqual(title.text, "Percent of Population that is {}".format(group))
+            washington = self.selenium.find_elements_by_class_name("Washington")[0]
+            if group == "English Learners":
+                self.assertIn("gray",washington.get_attribute("style"))
+            else:
+                self.assertIn("rgb(8, 69, 148)",washington.get_attribute("style"))
+                ActionChains(self.selenium).move_to_element(washington).perform()
+                tooltip = self.selenium.find_elements_by_class_name("tooltip-label")[0]
+                self.assertIn("Washington",tooltip.text)
+                self.assertIn("10.0%",tooltip.text)
+                washington = self.selenium.find_elements_by_class_name("Washington")[0]
+                self.assertIn("rgb(255, 204, 102)",washington.get_attribute("style"))
+            self.selenium.find_element_by_id("ratesvg")
+            title = self.selenium.find_elements_by_class_name("graph-title")[1]
+            self.assertEqual(title.text, "{} Graduation Rate".format(group))
+            california = self.selenium.find_elements_by_class_name("California")[1]
+            self.assertIn("rgb(8, 69, 148)",california.get_attribute("style"))
+            ActionChains(self.selenium).move_to_element(california).perform()
+            tooltip = self.selenium.find_elements_by_class_name("tooltip-label")[0]
+            self.assertIn("California",tooltip.text)
+            self.assertIn("90.0%",tooltip.text)
+            california = self.selenium.find_elements_by_class_name("California")[1]
+            self.assertIn("rgb(255, 204, 102)",california.get_attribute("style"))
         self.selenium.find_element_by_link_text('Home').click()
