@@ -96,6 +96,7 @@ class BasketballIndexViewTests(TestCase):
 		"""
 		response = self.client.get(reverse('basketball:index'))
 		self.assertEqual(response.status_code, 200)
+		self.assertEqual(response.context.get("leaders"), None)
 		self.assertContains(response, "March Madness Sadness")
 		self.assertContains(response, "ELO Ratings")
 		self.assertContains(response, "Explore the Data")
@@ -111,6 +112,7 @@ class BasketballIndexViewTests(TestCase):
 		create_bracket("TRUTH",2013)
 		create_bracket("ME",2013)
 		response = self.client.get(reverse('basketball:index'))
+		self.assertEqual(len(response.context.get("leaders")), 1)
 		self.assertEqual(response.status_code, 200)
 		self.assertContains(response, "March Madness Sadness")
 		self.assertContains(response, "ELO Ratings")
