@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Sum, Max, Min, Count, Q, FloatField, F
+from django.db.models import Sum, Max, Min, Count, Q, FloatField, F, OuterRef, Subquery
 from django.db.models.functions import Cast
 from .models import Team, Bracket, Tournament, Season_stats, Participant
 import json
@@ -13,7 +13,7 @@ def index(request):
 	of the project as well as the family leaderboard.
 	"""
 	#total up how many touranment wins each person has and sort the list
-	brackets = Bracket.objects.exclude(name__in=["TRUTH","ROOMMATE","BROTHER","DAD"]).order_by('-year','-score').distinct('year')
+	brackets = Bracket.objects.filter(name__in=["ME","MOM","AUNT"]).order_by('-year','-score').distinct('year')
 
 	if brackets:
 		wins = {}
@@ -274,7 +274,18 @@ def bracket(request, bracket_id):
 	return render(request, 'basketball/bracket.html', context)
 
 def stats(request):
-	return render(request, 'basketball/stats.html')
+	#matchup_by_elo = Season_stats.objects.values(bin=(((F('tournament_lost_to__season_stats__elo')-F('elo'))/50*50)**2)**0.5) \
+	#.exclude(tournament_lost_to__isnull = True) \
+	#.annotate(wp=Cast(Count('pk',filter=Q(elo__gte=F('tournament_lost_to__season_stats__elo'))),FloatField())/Cast(Count('bin'),FloatField())) \
+	#.order_by('-bin')
+	test0 = Season_stats.objects.filter(team=OuterRef('tournament_lost_to'),year=OuterRef('year'))
+	test1 = Season_stats.objects.exclude(tournament_lost_to__isnull=True) \
+	.values(diff=(((Subquery(test0.values('elo'))-F('elo'))/50*50)**2)**0.5) \
+	.annotate(wp=Cast(Count('pk',filter=Q(elo__lt=Subquery(test0.values('elo')))),FloatField())/Cast(Count('diff'),FloatField())) \
+	.order_by('diff')
+
+	matchup_by_elo = test1
+	return render(request, 'basketball/stats.html', {'test':matchup_by_elo})
 
 def participant(request,name):
 	try:
@@ -331,5 +342,12 @@ def stats_graph(request):
 			.annotate(wp=Cast(Sum('tournament_wins'),FloatField())/(Cast(Sum('tournament_wins'),FloatField())+Cast(Sum('tournament_losses'),FloatField()))*100) \
 			.order_by('bin')
 		data = {'wp':json.dumps(list(wp_by_ppgd), cls=DjangoJSONEncoder)}
+	elif graph == 'matchup_by_elo':
+		test0 = Season_stats.objects.filter(team=OuterRef('tournament_lost_to'),year=OuterRef('year'))
+		matchup_by_elo = Season_stats.objects.exclude(tournament_lost_to__isnull=True) \
+		.values(bin=(((Subquery(test0.values('elo'))-F('elo'))/25*25)**2)**0.5) \
+		.annotate(wp=100*Cast(Count('pk',filter=Q(elo__lt=Subquery(test0.values('elo')))),FloatField())/Cast(Count('bin'),FloatField())) \
+		.order_by('bin')
+		data = {'wp':json.dumps(list(matchup_by_elo), cls=DjangoJSONEncoder)}
 
 	return JsonResponse(data)

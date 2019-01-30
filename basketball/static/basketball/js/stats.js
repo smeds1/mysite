@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("wp_by_elo_btn").onclick = () => {
-    ajax_request("wp_by_elo",quantitativeBarChart,"ELO");
+    ajax_request("wp_by_elo",quantitativeBarChart,"ELO","Tournament Win Percentage",
+      "Tournament Winning Percentage by ELO");
   }
   document.getElementById("wp_by_seed_btn").onclick = () => {
     ajax_request("wp_by_seed",drawChart2,null);
@@ -10,16 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
     ajax_request("wp_by_conference",drawChart3,null);
   }
   document.getElementById("wp_by_venue_capacity_btn").onclick = () => {
-    ajax_request("wp_by_venue_capacity",quantitativeBarChart,"Home Venue Capacity");
+    ajax_request("wp_by_venue_capacity",quantitativeBarChart,"Home Venue Capacity",
+      "Tournament Win Percentage","Tournament Winning Percentage by Home Venue Capacity");
   }
   document.getElementById("wp_by_ppg_btn").onclick = () => {
-    ajax_request("wp_by_ppg",quantitativeBarChart,"In-Season PPG");
+    ajax_request("wp_by_ppg",quantitativeBarChart,"In-Season PPG",
+      "Tournament Win Percentage","Tournament Winning Percentage by Points Scored Per Game");
   }
   document.getElementById("wp_by_ppga_btn").onclick = () => {
-    ajax_request("wp_by_ppga",quantitativeBarChart,"In-Season PPG Against");
+    ajax_request("wp_by_ppga",quantitativeBarChart,"In-Season PPG Against",
+      "Tournament Win Percentage","Tournament Winning Percentage by Points Per Game Against");
   }
   document.getElementById("wp_by_ppgd_btn").onclick = () => {
-    ajax_request("wp_by_ppgd",quantitativeBarChart,"In-Season PPG Differential");
+    ajax_request("wp_by_ppgd",quantitativeBarChart,"In-Season PPG Differential",
+      "Tournament Win Percentage","Tournament Winning Percentage by Points Per Game Differential");
+  }
+  document.getElementById("matchup_by_elo_btn").onclick = () => {
+    ajax_request("matchup_by_elo",quantitativeBarChart,"Difference in ELO",
+      "Higher ELO Team Win %","Percent of Time Higher ELO Team Wins in Tournament Game");
   }
   document.getElementById("wp_by_elo_btn").click();
 });
@@ -28,7 +37,7 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-function ajax_request(graph,f,variable){
+function ajax_request(graph,f,x_var,y_var,title){
   $.ajaxSetup({
      beforeSend: function(xhr, settings) {
          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -43,7 +52,7 @@ function ajax_request(graph,f,variable){
     dataType: 'json',
     success: function (data) {
       if(f.name == "quantitativeBarChart"){
-        f(JSON.parse(data['wp']),variable);
+        f(JSON.parse(data['wp']),x_var,y_var,title);
       }
       else{
         f(JSON.parse(data['wp']));
@@ -232,7 +241,7 @@ function drawChart3(data) {
      .text('Percent of Games Won')
 }
 
-function quantitativeBarChart(data,variable) {
+function quantitativeBarChart(data,x_var,y_var,title) {
 
    $("svg").empty();
 
@@ -282,7 +291,8 @@ function quantitativeBarChart(data,variable) {
        .style("text-anchor", "middle");
 
    chart.append('g')
-      .call(d3.axisLeft(yScale));
+      .call(d3.axisLeft(yScale)
+          .tickFormat(d => d + "%"));
 
    //add grid lines
    chart.append('g')
@@ -307,7 +317,7 @@ function quantitativeBarChart(data,variable) {
     .attr('width', xScale(bin_width+min_bin)-0.5)
     .on('mouseenter', function (d) {
 
-      tooltip.text(`${variable}: ${format(d.bin)} - ${format(Number(d.bin)+bin_width)}\nWin Percentage: ${parseFloat(d.wp).toFixed(1)}%`)
+      tooltip.text(`${x_var}: ${format(d.bin)} - ${format(Number(d.bin)+bin_width)}\n${y_var}: ${parseFloat(d.wp).toFixed(1)}%`)
          .style("visibility", "visible")
          .style("left",(d3.event.pageX - 100) + "px")
          .style("top",(d3.event.pageY - 60) + "px")
@@ -321,18 +331,18 @@ function quantitativeBarChart(data,variable) {
      .attr('class', 'graph-title')
      .attr('x', width / 2 + margin.left)
      .attr('y', margin.top/2)
-     .text(`Tournament Winning Percentage by ${variable}`)
+     .text(title)
 
    svg.append('text')
      .attr('class', 'graph-label')
      .attr('x', width / 2 + margin.left)
      .attr('y', svgHeight - margin.bottom/8)
-     .text(`${variable}`)
+     .text(x_var)
 
    svg.append('text')
      .attr('class', 'graph-label')
      .attr('x', -(height / 2) - margin.top)
-     .attr('y', margin.left / 2.5)
+     .attr('y', margin.left / 4)
      .attr('transform', 'rotate(-90)')
-     .text('Percent of Games Won')
+     .text(y_var)
 }
