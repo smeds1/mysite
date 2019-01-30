@@ -159,3 +159,15 @@ class SeleniumBasketballTests(LiveServerTestCase):
             self.selenium.find_element_by_link_text(participant).click()
             self.assertEqual(self.selenium.title, "Basketball: "+participant)
             self.selenium.find_element_by_link_text("Home").click()
+
+    def test_participant_svg(self):
+        """
+        Make sure the partcipant pie graph renders
+        """
+        for participant in ["Mom","Aunt","Me"]:
+            self.selenium.find_element_by_link_text(participant).click()
+            self.assertEqual(self.selenium.title, "Basketball: "+participant)
+            graph = self.selenium.find_element_by_id("finishes_svg")
+            title = graph.find_elements_by_class_name("graph-title")[0]
+            self.assertEqual(title.text, "Tournament Placement Since 2006")
+            self.selenium.find_element_by_link_text("Home").click()

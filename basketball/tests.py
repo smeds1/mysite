@@ -85,7 +85,7 @@ def create_participant(name):
 	"""
 	Create a fake bracket with the given name
 	"""
-	Participant.objects.create(name=name, first_place=1, second_place=2,
+	return Participant.objects.create(name=name, first_place=1, second_place=2,
 		third_place=3, correct_champions = 0, average_predicted_upsets = 14.4,
 		average_correct_upsets=4.4)
 
@@ -176,6 +176,8 @@ class ParticipantViewTests(TestCase):
 		"""
 		response = self.client.get(reverse('basketball:participant',args=("XYZ",)))
 		self.assertEqual(response.status_code, 200)
+		self.assertEqual(response.context.get("person"), None)
+		self.assertNotEqual(response.context.get("message"), None)
 		self.assertContains(response, "Explore the Data")
 		self.assertContains(response, "Participant XYZ does not exist")
 		self.assertNotContains(response, "First Place Finishes")
@@ -185,9 +187,11 @@ class ParticipantViewTests(TestCase):
 		Make sure all participant pages render
 		"""
 		for (p,_) in Participant.PARTICIPANT_NAMES:
-			create_participant(p)
+			participant = create_participant(p)
 			response = self.client.get(reverse('basketball:participant',args=(p,)))
 			self.assertEqual(response.status_code, 200)
+			self.assertEqual(response.context.get("person"), participant)
+			self.assertNotEqual(response.context.get("json_finish_data"), None)
 			self.assertContains(response, "Explore the Data")
 			self.assertContains(response, "First Place Finishes")
 			self.assertNotContains(response, "does not exist")
