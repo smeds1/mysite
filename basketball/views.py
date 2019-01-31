@@ -64,7 +64,7 @@ def team_detail(request, team_id):
 	context = {}
 	outcome = ["Made Round of 64","Made Round of 32","Made Sweet 16",
 			"Made Elite Eight","Made Final Four","Made Championship","Won Championship"]
-	agg_stats = Season_stats.objects.filter(team=team_id).aggregate(
+	agg_stats = team.season_stats_set.all().aggregate(
 		Sum("tournament_wins"),Sum("tournament_losses"),
 		Max("tournament_wins"),Min("tournament_seed"))
 	context['wins'] = agg_stats["tournament_wins__sum"] if agg_stats["tournament_wins__sum"] else 0
@@ -76,7 +76,7 @@ def team_detail(request, team_id):
 		context["finish"] = outcome[agg_stats["tournament_wins__max"]]
 
 	#get season stats and dump ELO data into a JSON object to make a graph
-	stats = Season_stats.objects.filter(team=team_id).order_by('-year')
+	stats = team.season_stats_set.all().order_by('-year')
 	elo_data = []
 	for season in stats:
 		elo_data.append({'year': season.year, 'elo': season.elo})
