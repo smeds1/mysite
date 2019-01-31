@@ -308,7 +308,7 @@ def stats_graph(request):
 			.order_by('bin')
 		data = {'wp':json.dumps(list(wp_by_elo), cls=DjangoJSONEncoder)}
 	elif graph == 'wp_by_seed':
-		wp_by_seed = Season_stats.objects.values("tournament_seed") \
+		wp_by_seed = Season_stats.objects.values(value=F("tournament_seed")) \
 			.filter(made_tournament=True) \
 			.annotate(wp=Cast(Sum('tournament_wins'),FloatField())/(Cast(Sum('tournament_wins'),FloatField())+Cast(Sum('tournament_losses'),FloatField()))*100) \
 			.order_by('tournament_seed')
@@ -316,7 +316,7 @@ def stats_graph(request):
 	elif graph == 'wp_by_conference':
 		wins = Cast(Sum('season_stats__tournament_wins', filter=Q(season_stats__made_tournament=True)), FloatField())
 		losses = Cast(Sum('season_stats__tournament_losses', filter=Q(season_stats__made_tournament=True)), FloatField())
-		wp_by_conference = Team.objects.values("conference").annotate(wp=wins/(wins+losses)*100).order_by('-wp')
+		wp_by_conference = Team.objects.values(value=F("conference")).annotate(wp=wins/(wins+losses)*100).order_by('-wp')
 		data = {'wp': json.dumps(list(wp_by_conference), cls=DjangoJSONEncoder)}
 	elif graph == 'wp_by_venue_capacity':
 		wp_by_venue_capacity = Team.objects.values(bin=F('venue_capacity')/4000*4000) \
@@ -343,11 +343,25 @@ def stats_graph(request):
 			.order_by('bin')
 		data = {'wp':json.dumps(list(wp_by_ppgd), cls=DjangoJSONEncoder)}
 	elif graph == 'matchup_by_elo':
-		test0 = Season_stats.objects.filter(team=OuterRef('tournament_lost_to'),year=OuterRef('year'))
+		lost_to = Season_stats.objects.filter(team=OuterRef('tournament_lost_to'),year=OuterRef('year'))
 		matchup_by_elo = Season_stats.objects.exclude(tournament_lost_to__isnull=True) \
-		.values(bin=(((Subquery(test0.values('elo'))-F('elo'))/25*25)**2)**0.5) \
-		.annotate(wp=100*Cast(Count('pk',filter=Q(elo__lt=Subquery(test0.values('elo')))),FloatField())/Cast(Count('bin'),FloatField())) \
+		.values(bin=(((Subquery(lost_to.values('elo'))-F('elo'))/50*50)**2)**0.5) \
+		.annotate(wp=100*Cast(Count('pk',filter=Q(elo__gt=Subquery(lost_to.values('elo')))),FloatField())/Cast(Count('bin'),FloatField())) \
 		.order_by('bin')
 		data = {'wp':json.dumps(list(matchup_by_elo), cls=DjangoJSONEncoder)}
+	elif graph == 'matchup_by_seed':
+		lost_to = Season_stats.objects.filter(team=OuterRef('tournament_lost_to'),year=OuterRef('year'))
+		matchup_by_seed = Season_stats.objects.exclude(tournament_lost_to__isnull=True) \
+		.values(value=((Subquery(lost_to.values('tournament_seed'))-F('tournament_seed'))**2)**0.5) \
+		.annotate(wp=100*Cast(Count('pk',filter=Q(tournament_seed__lt=Subquery(lost_to.values('tournament_seed')))),FloatField())/Cast(Count('value'),FloatField())) \
+		.order_by('value')
+		data = {'wp':json.dumps(list(matchup_by_seed), cls=DjangoJSONEncoder)}
+	elif graph == 'matchup_by_ppg':
+		lost_to = Season_stats.objects.filter(team=OuterRef('tournament_lost_to'),year=OuterRef('year'))
+		matchup_by_ppg = Season_stats.objects.exclude(tournament_lost_to__isnull=True) \
+		.values(bin=(((Subquery(lost_to.values('ppg'))-F('ppg'))-(Subquery(lost_to.values('ppg'))-F('ppg'))%2)**2)**0.5) \
+		.annotate(wp=100*Cast(Count('pk',filter=Q(ppg__gt=Subquery(lost_to.values('ppg')))),FloatField())/Cast(Count('bin'),FloatField())) \
+		.order_by('bin')
+		data = {'wp':json.dumps(list(matchup_by_ppg), cls=DjangoJSONEncoder)}
 
 	return JsonResponse(data)
