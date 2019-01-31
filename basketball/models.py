@@ -739,70 +739,10 @@ class Tournament(models.Model):
 		in the tournament (for conferences that appeared at least once).
 		"""
 		conf_dict = {}
-		conf_dict[self.top_left_1.conference] = conf_dict.get(self.top_left_1.conference,0) + 1
-		conf_dict[self.top_left_2.conference] = conf_dict.get(self.top_left_2.conference,0) + 1
-		conf_dict[self.top_left_3.conference] = conf_dict.get(self.top_left_3.conference,0) + 1
-		conf_dict[self.top_left_4.conference] = conf_dict.get(self.top_left_4.conference,0) + 1
-		conf_dict[self.top_left_5.conference] = conf_dict.get(self.top_left_5.conference,0) + 1
-		conf_dict[self.top_left_6.conference] = conf_dict.get(self.top_left_6.conference,0) + 1
-		conf_dict[self.top_left_7.conference] = conf_dict.get(self.top_left_7.conference,0) + 1
-		conf_dict[self.top_left_8.conference] = conf_dict.get(self.top_left_8.conference,0) + 1
-		conf_dict[self.top_left_9.conference] = conf_dict.get(self.top_left_9.conference,0) + 1
-		conf_dict[self.top_left_10.conference] = conf_dict.get(self.top_left_10.conference,0) + 1
-		conf_dict[self.top_left_11.conference] = conf_dict.get(self.top_left_11.conference,0) + 1
-		conf_dict[self.top_left_12.conference] = conf_dict.get(self.top_left_12.conference,0) + 1
-		conf_dict[self.top_left_13.conference] = conf_dict.get(self.top_left_13.conference,0) + 1
-		conf_dict[self.top_left_14.conference] = conf_dict.get(self.top_left_14.conference,0) + 1
-		conf_dict[self.top_left_15.conference] = conf_dict.get(self.top_left_15.conference,0) + 1
-		conf_dict[self.top_left_16.conference] = conf_dict.get(self.top_left_16.conference,0) + 1
-		conf_dict[self.bottom_left_1.conference] = conf_dict.get(self.bottom_left_1.conference,0) + 1
-		conf_dict[self.bottom_left_2.conference] = conf_dict.get(self.bottom_left_2.conference,0) + 1
-		conf_dict[self.bottom_left_3.conference] = conf_dict.get(self.bottom_left_3.conference,0) + 1
-		conf_dict[self.bottom_left_4.conference] = conf_dict.get(self.bottom_left_4.conference,0) + 1
-		conf_dict[self.bottom_left_5.conference] = conf_dict.get(self.bottom_left_5.conference,0) + 1
-		conf_dict[self.bottom_left_6.conference] = conf_dict.get(self.bottom_left_6.conference,0) + 1
-		conf_dict[self.bottom_left_7.conference] = conf_dict.get(self.bottom_left_7.conference,0) + 1
-		conf_dict[self.bottom_left_8.conference] = conf_dict.get(self.bottom_left_8.conference,0) + 1
-		conf_dict[self.bottom_left_9.conference] = conf_dict.get(self.bottom_left_9.conference,0) + 1
-		conf_dict[self.bottom_left_10.conference] = conf_dict.get(self.bottom_left_10.conference,0) + 1
-		conf_dict[self.bottom_left_11.conference] = conf_dict.get(self.bottom_left_11.conference,0) + 1
-		conf_dict[self.bottom_left_12.conference] = conf_dict.get(self.bottom_left_12.conference,0) + 1
-		conf_dict[self.bottom_left_13.conference] = conf_dict.get(self.bottom_left_13.conference,0) + 1
-		conf_dict[self.bottom_left_14.conference] = conf_dict.get(self.bottom_left_14.conference,0) + 1
-		conf_dict[self.bottom_left_15.conference] = conf_dict.get(self.bottom_left_15.conference,0) + 1
-		conf_dict[self.bottom_left_16.conference] = conf_dict.get(self.bottom_left_16.conference,0) + 1
-		conf_dict[self.top_right_1.conference] = conf_dict.get(self.top_right_1.conference,0) + 1
-		conf_dict[self.top_right_2.conference] = conf_dict.get(self.top_right_2.conference,0) + 1
-		conf_dict[self.top_right_3.conference] = conf_dict.get(self.top_right_3.conference,0) + 1
-		conf_dict[self.top_right_4.conference] = conf_dict.get(self.top_right_4.conference,0) + 1
-		conf_dict[self.top_right_5.conference] = conf_dict.get(self.top_right_5.conference,0) + 1
-		conf_dict[self.top_right_6.conference] = conf_dict.get(self.top_right_6.conference,0) + 1
-		conf_dict[self.top_right_7.conference] = conf_dict.get(self.top_right_7.conference,0) + 1
-		conf_dict[self.top_right_8.conference] = conf_dict.get(self.top_right_8.conference,0) + 1
-		conf_dict[self.top_right_9.conference] = conf_dict.get(self.top_right_9.conference,0) + 1
-		conf_dict[self.top_right_10.conference] = conf_dict.get(self.top_right_10.conference,0) + 1
-		conf_dict[self.top_right_11.conference] = conf_dict.get(self.top_right_11.conference,0) + 1
-		conf_dict[self.top_right_12.conference] = conf_dict.get(self.top_right_12.conference,0) + 1
-		conf_dict[self.top_right_13.conference] = conf_dict.get(self.top_right_13.conference,0) + 1
-		conf_dict[self.top_right_14.conference] = conf_dict.get(self.top_right_14.conference,0) + 1
-		conf_dict[self.top_right_15.conference] = conf_dict.get(self.top_right_15.conference,0) + 1
-		conf_dict[self.top_right_16.conference] = conf_dict.get(self.top_right_16.conference,0) + 1
-		conf_dict[self.bottom_right_1.conference] = conf_dict.get(self.bottom_right_1.conference,0) + 1
-		conf_dict[self.bottom_right_2.conference] = conf_dict.get(self.bottom_right_2.conference,0) + 1
-		conf_dict[self.bottom_right_3.conference] = conf_dict.get(self.bottom_right_3.conference,0) + 1
-		conf_dict[self.bottom_right_4.conference] = conf_dict.get(self.bottom_right_4.conference,0) + 1
-		conf_dict[self.bottom_right_5.conference] = conf_dict.get(self.bottom_right_5.conference,0) + 1
-		conf_dict[self.bottom_right_6.conference] = conf_dict.get(self.bottom_right_6.conference,0) + 1
-		conf_dict[self.bottom_right_7.conference] = conf_dict.get(self.bottom_right_7.conference,0) + 1
-		conf_dict[self.bottom_right_8.conference] = conf_dict.get(self.bottom_right_8.conference,0) + 1
-		conf_dict[self.bottom_right_9.conference] = conf_dict.get(self.bottom_right_9.conference,0) + 1
-		conf_dict[self.bottom_right_10.conference] = conf_dict.get(self.bottom_right_10.conference,0) + 1
-		conf_dict[self.bottom_right_11.conference] = conf_dict.get(self.bottom_right_11.conference,0) + 1
-		conf_dict[self.bottom_right_12.conference] = conf_dict.get(self.bottom_right_12.conference,0) + 1
-		conf_dict[self.bottom_right_13.conference] = conf_dict.get(self.bottom_right_13.conference,0) + 1
-		conf_dict[self.bottom_right_14.conference] = conf_dict.get(self.bottom_right_14.conference,0) + 1
-		conf_dict[self.bottom_right_15.conference] = conf_dict.get(self.bottom_right_15.conference,0) + 1
-		conf_dict[self.bottom_right_16.conference] = conf_dict.get(self.bottom_right_16.conference,0) + 1
+		for region in ["top_left","bottom_left","top_right","bottom_right"]:
+			for i in range(1,17):
+				conf_dict[getattr(self,"{}_{}".format(region,i)).conference] = conf_dict.get(
+					getattr(self,"{}_{}".format(region,i)).conference,0) + 1
 		return conf_dict
 
 	class Meta:
