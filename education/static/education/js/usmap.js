@@ -99,7 +99,7 @@ function drawMap(data,id,title){
 
   //set up svg with proper margins
   var svgWidth = 500, svgHeight = 350;
-  var margin = { top: 30, right: 20, bottom: 70, left: 20 };
+  var margin = { top: 30, right: 20, bottom: 70, left: 10 };
   var width = svgWidth - margin.left - margin.right;
   var height = svgHeight - margin.top - margin.bottom;
   var svg = d3.select(id)
@@ -152,14 +152,14 @@ function drawMap(data,id,title){
 		.attr('class', 'legendEntry');
 
   legend.append('rect')
-    .attr("x", width - 30)
+    .attr("x", width - 50)
     .attr("y", (d, i) => height - i * 20 + 30)
     .attr("width", 10)
     .attr("height", 10)
     .style("fill", (d) => d);
 
   legend.append('text')
-    .attr("x", width - 15)
+    .attr("x", width - 35)
     .attr("y", (d, i) => height - i * 20 + 30)
     .attr("dy", "0.7em")
     .text((d) => {
