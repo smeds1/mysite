@@ -2,7 +2,7 @@ function drawChart(data, title) {
 
    //Set up SVG wtih proper margins
    var svgWidth = 500, svgHeight = 300;
-   var margin = { top: 40, right: 20, bottom: 70, left: 50 };
+   var margin = { top: 40, right: 20, bottom: 85, left: 60 };
    var width = svgWidth - margin.left - margin.right;
    var height = svgHeight - margin.top - margin.bottom;
    var svg = d3.select('svg')
@@ -48,7 +48,7 @@ function drawChart(data, title) {
 
    chart.append("g")
      .call(d3.axisLeft(y)
-     .tickFormat(d3.format("d")));
+     .tickFormat(d => d + "%"));
 
    //add grid lines
    chart.append('g')
@@ -92,7 +92,7 @@ function drawChart(data, title) {
    svg.append('text')
      .attr('class', 'graph-label')
      .attr('x', -(height / 2) - margin.top)
-     .attr('y', margin.left / 4)
+     .attr('y', margin.left / 3)
      .attr('transform', 'rotate(-90)')
      .text('Percent of Cohort');
 }
