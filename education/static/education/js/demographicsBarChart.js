@@ -85,7 +85,7 @@ function drawChart(data, title) {
    //add lables
    svg.append('text')
      .attr('class', 'graph-title')
-     .attr('x', width / 2 + margin.left)
+     .attr('x', width / 2 + margin.left/1.5)
      .attr('y', margin.top/2)
      .text(`${title}`);
 
