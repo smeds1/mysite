@@ -23,101 +23,108 @@
 	<div class="container">
     <div class="row">
       <div class="col-lg-5">
-		    <table class="table table-striped table-bordered table-sm">
-		      <thead><tr><th colspan="2" class="long_header">{{data.state|long_state}}</th></tr></thead>
-		      <tbody>
-						<tr>
-							<td>Graduation Rate</td>
-			        <td class="numeric">{{data.all_rate|percentage}}</td>
-						</tr>
-						<tr>
-							<td>Number Of Public High Schools</td>
-				      <td class="numeric">{{data.num_schools|intcomma}}</td>
-						</tr>
-						<tr>
-							<td>Students in 2015-16 Cohort</td>
-		          <td class="numeric">{{data.all_cohort|intcomma}}</td>
-						</tr>
-		      </tbody>
-		    </table>
-				<br>
-				<table class="table table-striped table-bordered table-sm">
-		      <thead>
-						<tr>
-							<th style="vertical-align:middle">Demographic</th>
-							<th style="text-align:center">Students in 15-16 Cohort</th>
-							<th style="text-align:center">Graduation Rate</th>
-						</tr>
-					</thead>
-		      <tbody>
-						{% if data.mwh_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'mwh' %}">White</a></td>
-								<td class="numeric">{{data.mwh_cohort|intcomma}}</td>
-								<td class="numeric">{{data.mwh_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.mbl_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'mbl' %}">Black</a></td>
-								<td class="numeric">{{data.mbl_cohort|intcomma}}</td>
-								<td class="numeric">{{data.mbl_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.mhi_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'mhi' %}">Hispanic</a></td>
-								<td class="numeric">{{data.mhi_cohort|intcomma}}</td>
-								<td class="numeric">{{data.mhi_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.mas_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'mas' %}">Asian</a></td>
-								<td class="numeric">{{data.mas_cohort|intcomma}}</td>
-								<td class="numeric">{{data.mas_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.mtr_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'mtr' %}">Multiracial</a></td>
-								<td class="numeric">{{data.mtr_cohort|intcomma}}</td>
-								<td class="numeric">{{data.mtr_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.mam_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'mam' %}">Native American</a></td>
-								<td class="numeric">{{data.mam_cohort|intcomma}}</td>
-								<td class="numeric">{{data.mam_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.lep_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'lep' %}">English Learners</a></td>
-								<td class="numeric">{{data.lep_cohort|intcomma}}</td>
-								<td class="numeric">{{data.lep_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.ecd_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'ecd' %}">Economically Disadvantaged</a></td>
-								<td class="numeric">{{data.ecd_cohort|intcomma}}</td>
-								<td class="numeric">{{data.ecd_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-						{% if data.cwd_rate %}
-							<tr>
-								<td><a href="{% url 'education:demographic_detail' 'cwd' %}">Children With Disabilities</a></td>
-								<td class="numeric">{{data.cwd_cohort|intcomma}}</td>
-								<td class="numeric">{{data.cwd_rate|percentage}}</td>
-							</tr>
-						{% endif %}
-		      </tbody>
-		    </table>
+				<div class="card">
+					<div class="card-body">
+				    <table class="table table-striped table-bordered table-sm">
+				      <thead><tr><th colspan="2" class="long_header">{{data.state|long_state}}</th></tr></thead>
+				      <tbody>
+								<tr>
+									<td>Graduation Rate</td>
+					        <td class="numeric">{{data.all_rate|percentage}}</td>
+								</tr>
+								<tr>
+									<td>Number Of Public High Schools</td>
+						      <td class="numeric">{{data.num_schools|intcomma}}</td>
+								</tr>
+								<tr>
+									<td>Students in 2015-16 Cohort</td>
+				          <td class="numeric">{{data.all_cohort|intcomma}}</td>
+								</tr>
+				      </tbody>
+				    </table>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-striped table-bordered table-sm">
+				      <thead>
+								<tr>
+									<th style="vertical-align:middle">Demographic</th>
+									<th style="text-align:center">Students in 15-16 Cohort</th>
+									<th style="text-align:center">Graduation Rate</th>
+								</tr>
+							</thead>
+				      <tbody>
+								{% if data.mwh_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'mwh' %}">White</a></td>
+										<td class="numeric">{{data.mwh_cohort|intcomma}}</td>
+										<td class="numeric">{{data.mwh_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.mbl_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'mbl' %}">Black</a></td>
+										<td class="numeric">{{data.mbl_cohort|intcomma}}</td>
+										<td class="numeric">{{data.mbl_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.mhi_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'mhi' %}">Hispanic</a></td>
+										<td class="numeric">{{data.mhi_cohort|intcomma}}</td>
+										<td class="numeric">{{data.mhi_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.mas_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'mas' %}">Asian</a></td>
+										<td class="numeric">{{data.mas_cohort|intcomma}}</td>
+										<td class="numeric">{{data.mas_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.mtr_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'mtr' %}">Multiracial</a></td>
+										<td class="numeric">{{data.mtr_cohort|intcomma}}</td>
+										<td class="numeric">{{data.mtr_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.mam_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'mam' %}">Native American</a></td>
+										<td class="numeric">{{data.mam_cohort|intcomma}}</td>
+										<td class="numeric">{{data.mam_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.lep_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'lep' %}">English Learners</a></td>
+										<td class="numeric">{{data.lep_cohort|intcomma}}</td>
+										<td class="numeric">{{data.lep_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.ecd_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'ecd' %}">Economically Disadvantaged</a></td>
+										<td class="numeric">{{data.ecd_cohort|intcomma}}</td>
+										<td class="numeric">{{data.ecd_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+								{% if data.cwd_rate %}
+									<tr>
+										<td><a href="{% url 'education:demographic_detail' 'cwd' %}">Children With Disabilities</a></td>
+										<td class="numeric">{{data.cwd_cohort|intcomma}}</td>
+										<td class="numeric">{{data.cwd_rate|percentage}}</td>
+									</tr>
+								{% endif %}
+				      </tbody>
+				    </table>
+					</div>
+				</div>
     	</div>
     	<div class="col-lg-7" id="statedemographics_svg">
-      	<svg></svg>
+      	<svg height="300" width="500" class="cardish"></svg>
     	</div>
 		</div>
   </div>

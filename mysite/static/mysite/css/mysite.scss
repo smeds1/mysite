@@ -4,12 +4,21 @@ $textcolor: #000000; //black
 $linkcolor: #007a99; //blue
 $hovercolor: #00CCFF; //bright blue
 $graphhovorcolor: #FFCC66; //beige
+$backgroundcolor: #EBEBE0; //gray
 
 //main elements of any page
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 100%;
   color: $textcolor;
+  background-color: $backgroundcolor;
+}
+
+.card, .cardish{
+  border: 5px solid $backgroundcolor;
+  padding: 0px;
+  border-radius: 15px;
+  background-color: white;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -78,13 +87,19 @@ table {
   }
 }
 
+.card-table{
+  background-color: white;
+  border-radius: 15px 15px 15px 15px;
+}
+
 //navbar
 .nav-item.active a {
   color: $hovercolor;
 }
 
 .navbar {
-  background-color: $color1;
+  background-color: rgba(0,0,0,0.8);
+  box-shadow: 2px 2px grey;
 
   a {
     color: white;

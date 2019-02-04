@@ -19,32 +19,43 @@
 		<div class="row">
 			{% if actual %}
 				<div class="col-lg-4">
-					<table class="table table-sm table-bordered">
-						<thead><tr><th colspan=2 class="long_header">{{ year }} Tournament</th></tr></thead>
-						<tbody>
-							<tr><th>Winner</th><td><a href="{% url 'basketball:team_detail' actual.championship.id %}">{{ actual.championship }}</a></td></tr>
-							<tr><th>Upsets</th><td>{{ upsets }}</td></tr>
-							<tr><th>Full Results</th><td><a href="{% url 'basketball:bracket' actual.id %}">Results</a></td></tr>
-						</tbody>
-					</table>
-					<br>
-					<table class="table table-sm table-bordered">
-					<tr><th colspan="2" class="long_header">Final Standings</th></tr>
-				    {% for bracket in brackets %}
-						<tr><td>
-							{% if bracket.name in participants %}
-								<a href="{% url 'basketball:participant' bracket.name %}">{{ bracket.name|title }}</a>
-							{% else %}
-								{{ bracket.name|title }}
-							{% endif %}
-							</td>
-						<td>{{ bracket.score }} <a href="{% url 'basketball:bracket' bracket.id %}" style="font-size:0.6em">(Bracket)</a></td>
-						<tr>
-				    {% endfor %}
-					</table>
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-sm table-bordered table-striped">
+								<thead><tr><th colspan=2 class="long_header">{{ year }} Tournament</th></tr></thead>
+								<tbody>
+									<tr><th>Winner</th><td><a href="{% url 'basketball:team_detail' actual.championship.id %}">{{ actual.championship }}</a></td></tr>
+									<tr><th>Upsets</th><td>{{ upsets }}</td></tr>
+									<tr><th>Full Results</th><td><a href="{% url 'basketball:bracket' actual.id %}">Results</a></td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-sm table-bordered table-striped">
+								<thead>
+									<tr><th colspan="2" class="long_header">Final Standings</th></tr>
+								</thead>
+								<tbody>
+							    {% for bracket in brackets %}
+										<tr><td>
+											{% if bracket.name in participants %}
+												<a href="{% url 'basketball:participant' bracket.name %}">{{ bracket.name|title }}</a>
+											{% else %}
+												{{ bracket.name|title }}
+											{% endif %}
+											</td>
+											<td>{{ bracket.score }} <a href="{% url 'basketball:bracket' bracket.id %}" style="font-size:0.6em">(Bracket)</a></td>
+											</tr>
+							    {% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-				<div class="col-lg-8" id="teamsintournament_svg">
-					<svg></svg>
+				<div class="col-lg-8" id="teamsintournament_svg" height="600" width="300">
+					<svg class="cardish"></svg>
 				</div>
 			{% else %}
 			    <p>No tournament data available for {{ year }}.</p>

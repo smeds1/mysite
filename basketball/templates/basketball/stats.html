@@ -13,33 +13,37 @@
 {% block body %}
 	<div class="tooltip-label"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-4">
-				<form method="post" id="the_form">
-					{% csrf_token %}
-					<script type="text/javascript">
-						var csrftoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-					</script>
-					<span>Tournament Winning Percentage</span>
-					<ul class="graph-links">
-						<li class="graph-link" id="wp_by_elo_btn">ELO</li>
-						<li class="graph-link" id="wp_by_seed_btn">Seed</li>
-						<li class="graph-link" id="wp_by_conference_btn">Conference</li>
-						<li class="graph-link" id="wp_by_venue_capacity_btn">Home Venue Capacity</li>
-						<li class="graph-link" id="wp_by_ppg_btn">In-Season Points Per Game</li>
-						<li class="graph-link" id="wp_by_ppga_btn">In-Season Points Per Game Against</li>
-						<li class="graph-link" id="wp_by_ppgd_btn">In-Season Points Per Game Differential</li>
-					</ul>
-					<span>Tournament Matchups</span>
-					<ul class="graph-links">
-						<li class="graph-link" id="matchup_by_elo_btn">ELO</li>
-						<li class="graph-link" id="matchup_by_seed_btn">Seed</li>
-						<li class="graph-link" id="matchup_by_ppg_btn">In-Season Points Per Game</li>
-					</ul>
-				</form>
-			</div>
-			<div class="col-sm-8">
-		    <svg id="wp_by_elo"></svg>
+		<div class="card" style="width: 52rem;">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<form method="post" id="the_form">
+							{% csrf_token %}
+							<script type="text/javascript">
+								var csrftoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+							</script>
+							<span>Tournament Winning Percentage</span>
+							<ul class="graph-links">
+								<li class="graph-link" id="wp_by_elo_btn">ELO</li>
+								<li class="graph-link" id="wp_by_seed_btn">Seed</li>
+								<li class="graph-link" id="wp_by_conference_btn">Conference</li>
+								<li class="graph-link" id="wp_by_venue_capacity_btn">Home Venue Capacity</li>
+								<li class="graph-link" id="wp_by_ppg_btn">In-Season Points Per Game</li>
+								<li class="graph-link" id="wp_by_ppga_btn">In-Season Points Per Game Against</li>
+								<li class="graph-link" id="wp_by_ppgd_btn">In-Season Points Per Game Differential</li>
+							</ul>
+							<span>Tournament Matchups</span>
+							<ul class="graph-links">
+								<li class="graph-link" id="matchup_by_elo_btn">ELO</li>
+								<li class="graph-link" id="matchup_by_seed_btn">Seed</li>
+								<li class="graph-link" id="matchup_by_ppg_btn">In-Season Points Per Game</li>
+							</ul>
+						</form>
+					</div>
+					<div class="col-sm-auto">
+				    <svg id="wp_by_elo" width="500" height="300"></svg>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

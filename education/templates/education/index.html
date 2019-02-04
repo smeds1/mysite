@@ -18,26 +18,33 @@
 	<div class="tooltip-label"></div>
 	<div class="container">
 		<div class="row">
-      <div class="col-lg-6">
-				<h3>High School Graduation</h3>
-				<p>This project explores the public high school graduation rates in the United
-				States for the 2015-2016 school year in an attempt to better understand
-				what factors (such as race or economic status) influence whether or not
-				students complete their high school education. </p>
-
-				<h5>How Rates Were Calculated</h5>
-				<p>Schools report the exact number of students that fall into certain
-					demographics (such as "economically disadvantaged") but they are not
-					required to report the exact number of students from that group that
-			 		graduate. Instead, they can report a range such as "85%-89%"" or "Less
-			 		than 50%". In cases where there are fewer than ten students in a group,
-		 			the percentage is not reported at all to protect the privacy of the students.
-	 				To estimate the graduation rates, I used the middle value in each reported
-		 			range and omitted the students where no range was given.</p>
+      <div class="col-lg-5">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">High School Graduation</h5>
+						<p class="card-text">This project explores the public high school graduation rates in the United
+						States for the 2015-2016 school year in an attempt to better understand
+						what factors (such as race or economic status) influence whether or not
+						students complete their high school education. </p>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">How Rates Were Calculated</h5>
+						<p class="card-text">Schools report the exact number of students that fall into certain
+							demographics (such as "economically disadvantaged") but they are not
+							required to report the exact number of students from that group that
+					 		graduate. Instead, they can report a range such as "85%-89%"" or "Less
+					 		than 50%". In cases where there are fewer than ten students in a group,
+				 			the percentage is not reported at all to protect the privacy of the students.
+			 				To estimate the graduation rates, I used the middle value in each reported
+				 			range and omitted the students where no range was given.</p>
+					</div>
+				</div>
 			</div>
 			{% if json_data %}
-				<div class="col-lg-6">
-					<svg id="graduation_rate_map"></svg>
+				<div class="col-lg-7">
+					<svg id="graduation_rate_map" width="500" height="350" class="cardish"></svg>
 				</div>
 			{% endif %}
 		</div>

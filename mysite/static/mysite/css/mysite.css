@@ -2,6 +2,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 100%;
   color: #000000;
+  background-color: #EBEBE0;
+}
+
+.card, .cardish {
+  border: 5px solid #EBEBE0;
+  padding: 0px;
+  border-radius: 15px;
+  background-color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -65,12 +73,18 @@ table .string {
   text-align: left;
 }
 
+.card-table {
+  background-color: white;
+  border-radius: 15px 15px 15px 15px;
+}
+
 .nav-item.active a {
   color: #00CCFF;
 }
 
 .navbar {
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 2px 2px grey;
 }
 .navbar a {
   color: white;

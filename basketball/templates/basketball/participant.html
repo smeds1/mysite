@@ -18,30 +18,34 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <table class="table table-sm table-bordered">
-          <thead><tr><th colspan=2 class="long_header">{{ person.name|title }}</th></tr></thead>
-          <tbody>
-            <tr>
-							<td>First Place Finishes</td>
-							<td class="numeric">{{person.first_place}}</td>
-						</tr>
-            <tr>
-							<td>Number of Correct National Champions</td>
-							<td class="numeric">{{person.correct_champions}}</td>
-						</tr>
-            <tr>
-							<td>Average Number of Predicted Upsets</td>
-							<td class="numeric">{{person.average_predicted_upsets|floatformat}}</td>
-						</tr>
-						<tr>
-							<td>Average Number of Correct Upsets</td>
-							<td class="numeric">{{person.average_correct_upsets|floatformat}}</td>
-						</tr>
-          </tbody>
-        </table>
+				<div class="card">
+					<div class="card-body">
+		        <table class="table table-sm table-bordered table-striped">
+		          <thead><tr><th colspan=2 class="long_header">{{ person.name|title }}</th></tr></thead>
+		          <tbody>
+		            <tr>
+									<td>First Place Finishes</td>
+									<td class="numeric">{{person.first_place}}</td>
+								</tr>
+		            <tr>
+									<td>Number of Correct National Champions</td>
+									<td class="numeric">{{person.correct_champions}}</td>
+								</tr>
+		            <tr>
+									<td>Average Number of Predicted Upsets</td>
+									<td class="numeric">{{person.average_predicted_upsets|floatformat}}</td>
+								</tr>
+								<tr>
+									<td>Average Number of Correct Upsets</td>
+									<td class="numeric">{{person.average_correct_upsets|floatformat}}</td>
+								</tr>
+		          </tbody>
+		        </table>
+					</div>
+				</div>
       </div>
-      <div class="col-lg-6">
-        <svg id="finishes_svg">
+      <div class="col-lg-auto">
+        <svg id="finishes_svg" height="300" width="300" class="cardish">
       </div>
     </div>
   </div>

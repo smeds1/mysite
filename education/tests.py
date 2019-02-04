@@ -39,7 +39,7 @@ class EducationIndexViewTests(TestCase):
         self.assertContains(response, "High School Graduation")
         self.assertContains(response, "How Rates Were Calculated")
         self.assertContains(response, "Home")
-        self.assertNotContains(response, '<svg id="graduation_rate_map">')
+        self.assertNotContains(response, '<svg id="graduation_rate_map"')
 
     def test_with_data(self):
         """
@@ -52,7 +52,7 @@ class EducationIndexViewTests(TestCase):
         self.assertNotEqual(response.context.get("json_data"), None)
         self.assertContains(response, "High School Graduation")
         self.assertContains(response, "How Rates Were Calculated")
-        self.assertContains(response, '<svg id="graduation_rate_map">')
+        self.assertContains(response, '<svg id="graduation_rate_map"')
 
 class EducationStatesViewTest(TestCase):
 
@@ -169,7 +169,7 @@ class EducationDemographicDetailsViewTest(TestCase):
         self.assertNotEqual(response.context.get("message"), None)
         self.assertContains(response, "Home")
         self.assertContains(response, "Error: No such group XYZ")
-        self.assertNotContains(response, '<svg id="popsvg">')
+        self.assertNotContains(response, '<svg id="popsvg"')
 
     def test_no_data(self):
         """
@@ -183,7 +183,7 @@ class EducationDemographicDetailsViewTest(TestCase):
             self.assertNotEqual(response.context.get("message"), None)
             self.assertContains(response, "Home")
             self.assertContains(response, "No Data Available")
-            self.assertNotContains(response, '<svg id="popsvg">')
+            self.assertNotContains(response, '<svg id="popsvg"')
 
     def test_with_data(self):
         """
@@ -198,4 +198,4 @@ class EducationDemographicDetailsViewTest(TestCase):
             self.assertNotEqual(response.context.get("json_population_data"), None)
             self.assertContains(response, "Home")
             self.assertNotContains(response, "No Data Available")
-            self.assertContains(response, '<svg id="popsvg">')
+            self.assertContains(response, '<svg id="popsvg"')

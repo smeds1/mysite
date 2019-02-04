@@ -35,7 +35,7 @@ def teams(request):
 		team_list = Team.objects.filter(conference=abbrev).order_by('school_name')
 		if team_list:
 			data.append((full, team_list))
-
+	
 	return render(request, 'basketball/teams.html', {'data': data})
 
 def tournaments(request):
@@ -44,6 +44,7 @@ def tournaments(request):
 	"""
 	winners = Season_stats.objects.filter(tournament_wins=6).order_by('-year')
 	brackets = Bracket.objects.filter(name="TRUTH").order_by('-year')
+
 	if not winners or not brackets or len(winners) != len(brackets):
 		return render(request, 'basketball/tournaments.html')
 	return render(request, 'basketball/tournaments.html', {'winners': zip(winners, brackets)})
@@ -93,9 +94,13 @@ def tournament_detail(request, year):
 	and the score for their brackets. It also provides a link to the actual
 	results of the tournament.
 	"""
-	brackets = Bracket.objects.filter(year=year).exclude(name='TRUTH').order_by('-score')
-	actual = Bracket.objects.filter(year=year, name="TRUTH").get()
-	upsets = actual.num_upsets()
+	try:
+		brackets = Bracket.objects.filter(year=year).exclude(name='TRUTH').order_by('-score')
+		actual = Bracket.objects.filter(year=year, name="TRUTH").get()
+		upsets = actual.num_upsets()
+	except ObjectDoesNotExist:
+		message = "Tournament data does not exist for {}".format(year)
+		return render(request, 'basketball/error.html', {"message": message})
 
 	starting64 = Tournament.objects.filter(year=year).get()
 	conferences = starting64.getConferences()

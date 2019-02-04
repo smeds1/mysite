@@ -46,26 +46,22 @@ class SeleniumIndexTests(LiveServerTestCase):
         """
         Make sure all links in body open correctly
         """
-        kaggle = self.selenium.find_element_by_link_text("Kaggle's")
-        kaggle.click()
+        self.selenium.find_element_by_link_text("Kaggle's").click()
         WebDriverWait(self.selenium, 10).until(EC.number_of_windows_to_be(2))
         self.selenium.switch_to_window(self.selenium.window_handles[1])
         self.assertEqual(self.selenium.title, "NCAA Basketball | Kaggle")
         self.selenium.close()
         self.selenium.switch_to_window(self.selenium.window_handles[0])
-        doe = self.selenium.find_element_by_link_text('U.S. Department of Education')
-        doe.click()
+        self.selenium.find_element_by_link_text('U.S. Department of Education').click()
         WebDriverWait(self.selenium, 10).until(EC.number_of_windows_to_be(2))
         self.selenium.switch_to_window(self.selenium.window_handles[1])
         self.assertEqual(self.selenium.title, "EDFacts Data Files | U.S. Department of Education")
         self.selenium.close()
         self.selenium.switch_to_window(self.selenium.window_handles[0])
-        basketball = self.selenium.find_element_by_link_text("Basketball")
-        basketball.click()
+        self.selenium.find_element_by_link_text("Basketball Project").click()
         self.assertEqual(self.selenium.title, "Basketball Project")
         self.selenium.find_elements_by_class_name("navbar-brand")[0].click()
-        education = self.selenium.find_element_by_link_text("Education")
-        education.click()
+        self.selenium.find_element_by_link_text("Education Project").click()
         self.assertEqual(self.selenium.title, "Education Project")
         self.selenium.find_elements_by_class_name("navbar-brand")[0].click()
 
@@ -78,7 +74,8 @@ class AllPagesOpen(TestCase):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "About Me")
-        self.assertContains(response, "My Projects")
+        self.assertContains(response, "March Madness")
+        self.assertContains(response, "graduation rates")
 
     def test_about_me_loads(self):
         """

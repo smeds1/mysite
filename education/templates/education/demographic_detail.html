@@ -22,11 +22,11 @@
 	<div class="container">
 		{% if json_population_data|length > 2 %}
 	    <div class="row">
-	      <div class="col-lg-6">
-	        <svg id="popsvg"></svg>
-	      </div>
-				<div class="col-lg-6">
-	        <svg id="ratesvg"></svg>
+	      <div class="col-lg-auto">
+	        <svg id="popsvg" height="350" width="500" class="cardish"></svg>
+				</div>
+				<div class="col-lg-auto">
+	      	<svg id="ratesvg" height="350" width="500" class="cardish"></svg>
 	      </div>
 			</div>
 		{% else %}

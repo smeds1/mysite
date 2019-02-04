@@ -127,9 +127,12 @@ class TournamentViewTests(TestCase):
 		"""
 		response = self.client.get(reverse('basketball:tournaments'))
 		self.assertEqual(response.status_code, 200)
+		self.assertEqual(response.context.get("winners"), None)
 		self.assertContains(response, "Explore the Data")
 		self.assertContains(response, "No tournament data available")
 		self.assertNotContains(response, "ELO Rating")
+		self.assertNotContains(response, "2013</a></td>")
+		self.assertNotContains(response, "Results")
 
 	def test_with_data(self):
 		"""
@@ -141,8 +144,11 @@ class TournamentViewTests(TestCase):
 		create_stats(2013)
 		response = self.client.get(reverse('basketball:tournaments'))
 		self.assertEqual(response.status_code, 200)
+		self.assertNotEqual(response.context.get("winners"), None)
 		self.assertContains(response, "Explore the Data")
 		self.assertContains(response, "ELO Rating")
+		self.assertContains(response, "2013</a></td>")
+		self.assertContains(response, "Results")
 		self.assertNotContains(response, "No tournament data available")
 
 class TeamViewTests(TestCase):

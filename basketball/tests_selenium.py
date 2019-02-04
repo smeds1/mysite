@@ -95,11 +95,18 @@ def create_stats():
     """
     team_list = Team.objects.order_by('school_name')
     for team in team_list:
-        for year in range(2006,2019):
-            Season_stats.objects.create(team=team, year=str(year), elo=1700, wins=22, losses=2,
-            ppg=88.1, ppga=64.6, made_tournament=True, tournament_seed=1,
-            tournament_wins=6,tournament_losses=0,
-            tournament_region=None,tournament_lost_to=None)
+        if team.school_name == "Team0":
+            for year in range(2006,2019):
+                Season_stats.objects.create(team=team, year=str(year), elo=1700, wins=22, losses=2,
+                ppg=88.1, ppga=64.6, made_tournament=True, tournament_seed=1,
+                tournament_wins=6,tournament_losses=0,
+                tournament_region=None,tournament_lost_to=None)
+        else:
+            for year in range(2006,2019):
+                Season_stats.objects.create(team=team, year=str(year), elo=1700, wins=22, losses=2,
+                ppg=88.1, ppga=64.6, made_tournament=True, tournament_seed=1,
+                tournament_wins=1,tournament_losses=1,
+                tournament_region=None,tournament_lost_to=None)
 
 class SeleniumBasketballTests(LiveServerTestCase):
 
@@ -171,3 +178,13 @@ class SeleniumBasketballTests(LiveServerTestCase):
             title = graph.find_elements_by_class_name("graph-title")[0]
             self.assertEqual(title.text, "Tournament Placement Since 2006")
             self.selenium.find_element_by_link_text("Home").click()
+
+    def test_tournament_links(self):
+        """
+        Make sure all links on the tournament page work
+        """
+        self.selenium.find_element_by_link_text("Tournaments").click()
+        for year in range(2006,2019):
+            self.selenium.find_element_by_link_text(str(year)).click()
+            self.assertEqual(self.selenium.title, "Basketball: {} Tournament".format(year))
+            self.selenium.find_element_by_link_text("Tournaments").click()

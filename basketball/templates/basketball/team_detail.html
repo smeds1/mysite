@@ -18,51 +18,54 @@
   </script>
 	<div class="container">
 		<div class="row padded_div">
-			<div class="col-sm">
-			  <h3>{{ team.school_name }} {{ team.school_mascot }}</h3>
-			  <table class="table-sm table-bordered" id="team-info">
-			  <tr><th>Conference</th><td>{{team.get_conference_display}}</td></tr>
-			  <tr><th>Location</th><td>{{team.venue_city}}, {{team.venue_state}}</td></tr>
-			  <tr><th>Home Venue</th><td>{{team.venue_name}}</td></tr>
-			  <tr><th>Venue Capacity</th><td>{{team.venue_capacity|intcomma}}</td></tr>
-				{% if seed != "N/A" %}
-					<tr class="tournament-stats"><th>Tournament Record Since {{first_year}}</th><td>{{wins}}-{{losses}}</td></tr>
-					<tr class="tournament-stats"><th>Highest Tournament Seed Since {{first_year}}</th><td>{{seed}}</td></tr>
-					<tr class="tournament-stats"><th>Best Tournament Finish Since {{first_year}}</th><td>{{finish}}</td></tr>
-				{% endif %}
-				</table>
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-body">
+					  <h5 class="card-title">{{ team.school_name }} {{ team.school_mascot }}</h5>
+					  <table class="table-sm table-bordered" id="team-info">
+					  <tr><th>Conference</th><td>{{team.get_conference_display}}</td></tr>
+					  <tr><th>Location</th><td>{{team.venue_city}}, {{team.venue_state}}</td></tr>
+					  <tr><th>Home Venue</th><td>{{team.venue_name}}</td></tr>
+					  <tr><th>Venue Capacity</th><td>{{team.venue_capacity|intcomma}}</td></tr>
+						{% if seed != "N/A" %}
+							<tr class="tournament-stats"><th>Tournament Record Since {{first_year}}</th><td>{{wins}}-{{losses}}</td></tr>
+							<tr class="tournament-stats"><th>Highest Tournament Seed Since {{first_year}}</th><td>{{seed}}</td></tr>
+							<tr class="tournament-stats"><th>Best Tournament Finish Since {{first_year}}</th><td>{{finish}}</td></tr>
+						{% endif %}
+						</table>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm" id="elo_svg">
-				<svg></svg>
+			<div class="col-lg-auto" id="elo_svg">
+				<svg height="250" width="450" class="cardish"></svg>
 			</div>
 		</div>
 	  {% if stats %}
 			<div class="row padded_div">
-				<div class="col-sm">
-		  	<h6>Historical Stats</h6>
-		  	<table class="table table-sm table-bordered table-striped">
-					<thead>
-		  		<tr><th>Year</th><th>ELO Rating</th><th>Regular Season Record</th>
-		      <th>Points Per Game</th><th>Points Per Game Against</th>
-		      <th>NCAA Tournament Record</th><th>Tournament Seed</th></tr>
-					</thead>
-			  	{% for season in stats %}
-			  		<tr>
-			  		<td align="center"><a href="{% url 'basketball:tournament_detail' season.year %}">{{season.year}}</a></td>
-			  		<td align="center">{{ season.elo }}</td>
-			      <td align="center">{{ season.wins }} - {{ season.losses }}</td>
-			      <td align="center">{{ season.ppg }}</td>
-			      <td align="center">{{ season.ppga }}</td>
-			  		{% if season.made_tournament %}
-			  			<td align="center">{{ season.tournament_wins }} - {{ season.tournament_losses }}</td>
-			  			<td align="center">{{ season.tournament_seed }}</td>
-			  		{% else %}
-			  			<td align="center">Did not make tournament</td>
-			  			<td align="center">N/A</td>
-			  		{% endif %}
-			  		</tr>
-			  	{% endfor %}
-		  	</table>
+				<div class="col-lg">
+			  	<table class="table table-sm table-bordered table-striped card-table">
+						<thead>
+			  		<tr><th>Year</th><th>ELO Rating</th><th>Regular Season Record</th>
+			      <th>Points Per Game</th><th>Points Per Game Against</th>
+			      <th>NCAA Tournament Record</th><th>Tournament Seed</th></tr>
+						</thead>
+				  	{% for season in stats %}
+				  		<tr>
+				  		<td align="center"><a href="{% url 'basketball:tournament_detail' season.year %}">{{season.year}}</a></td>
+				  		<td align="center">{{ season.elo }}</td>
+				      <td align="center">{{ season.wins }} - {{ season.losses }}</td>
+				      <td align="center">{{ season.ppg }}</td>
+				      <td align="center">{{ season.ppga }}</td>
+				  		{% if season.made_tournament %}
+				  			<td align="center">{{ season.tournament_wins }} - {{ season.tournament_losses }}</td>
+				  			<td align="center">{{ season.tournament_seed }}</td>
+				  		{% else %}
+				  			<td align="center">Did not make tournament</td>
+				  			<td align="center">N/A</td>
+				  		{% endif %}
+				  		</tr>
+				  	{% endfor %}
+			  	</table>
 				</div>
 			</div>
 	  {% endif %}
