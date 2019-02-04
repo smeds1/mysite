@@ -6,7 +6,7 @@ function drawChart(data) {
 
    //Set up SVG wtih proper margins
    var svgWidth = 600, svgHeight = 300;
-   var margin = { top: 40, right: 20, bottom: 90, left: 50 };
+   var margin = { top: 40, right: 20, bottom: 100, left: 50 };
    var width = svgWidth - margin.left - margin.right;
    var height = svgHeight - margin.top - margin.bottom;
    var svg = d3.select('svg')
@@ -86,13 +86,13 @@ function drawChart(data) {
    svg.append('text')
      .attr('class', 'graph-label')
      .attr('x', width / 2 + margin.left)
-     .attr('y', svgHeight - margin.bottom/8)
+     .attr('y', svgHeight - margin.bottom/6)
      .text('Conference')
 
    svg.append('text')
      .attr('class', 'graph-label')
      .attr('x', -(height / 2) - margin.top)
-     .attr('y', margin.left / 4)
+     .attr('y', margin.left / 2)
      .attr('transform', 'rotate(-90)')
      .text('Count')
 }
